@@ -13,7 +13,7 @@ export class IndexBuffer extends Buffer
 
     public dispose(): void
     {
-        // TODO Renderer.UnbindAllIndexBuffer(this)
+        // Renderer.UnbindAllIndexBuffer(this)
         super.dispose()
     }
 

@@ -3,7 +3,7 @@ import { Vector } from "../../geom/Vector";
 import { Visual } from "../../display/Visual";
 import { Camera } from "../../display/Camera";
 
-export class CameraWorldDvectorConstant extends ShaderFloat
+export class CameraWorldDVectorConstant extends ShaderFloat
 {
     public constructor()
     {

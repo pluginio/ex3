@@ -7,7 +7,7 @@ export abstract class ControlledObject implements Disposable
 
     public dispose(): void
     {
-        this.detatchAllControllers()
+        this.detachAllControllers()
         this._controllers.length = 0
     }
 
@@ -59,7 +59,7 @@ export abstract class ControlledObject implements Disposable
         }
     }
 
-    public detatchAllControllers(): void
+    public detachAllControllers(): void
     {
         this._controllers.forEach(controller => {
             controller.object = null

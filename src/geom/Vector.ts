@@ -193,7 +193,7 @@ export class Vector implements Disposable {
         v2.normalize()
     }
 
-    public static generateOthonormalBasis(
+    public static generateOrthonormalBasis(
         v0: Vector,
         v1: Vector,
         v2: Vector

@@ -66,6 +66,6 @@ export class Light implements Disposable
     public set direction(direction: Vector)
     {
         this.dVector = direction
-        Vector.generateOthonormalBasis(this.uVector, this.rVector, this.dVector)
+        Vector.generateOrthonormalBasis(this.uVector, this.rVector, this.dVector)
     }
 }

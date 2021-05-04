@@ -19,8 +19,8 @@ export class LightModelPositionConstant extends ShaderFloat
     public update(visual: Visual, camera: Camera): void
     {
         let worldPosition: Point = this._light.position
-        let worldInvMarix: Matrix = visual.worldTransform.inverse
-        let modelPosition: Point = worldInvMarix.multiplyPoint(worldPosition)
+        let worldInvMatrix: Matrix = visual.worldTransform.inverse
+        let modelPosition: Point = worldInvMatrix.multiplyPoint(worldPosition)
         
         this._data.position = 0
         this._data.writeFloat32(modelPosition.x)

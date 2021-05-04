@@ -89,7 +89,7 @@ export class VisualEffectInstance implements Disposable {
         return null
     }
 
-    public getPixelParameteres(pass: number): ShaderParameters
+    public getPixelParameters(pass: number): ShaderParameters
     {
         if(0 <= pass && pass < this._numPasses)
         {
@@ -122,7 +122,7 @@ export class VisualEffectInstance implements Disposable {
         return -1
     }
 
-    public setVetexTextureByName(pass: number, name: string, texture: Texture): number
+    public setVertexTextureByName(pass: number, name: string, texture: Texture): number
     {
         if(0 <= pass && pass < this._numPasses)
         {

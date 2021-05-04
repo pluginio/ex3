@@ -20,7 +20,7 @@ export class VisualTechnique
         }
         else
         {
-            console.assert(false, "Input to InsertPass must be nonnull")
+            console.assert(false, "Input to InsertPass must be non null")
         }
     }
 

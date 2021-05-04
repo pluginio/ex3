@@ -1,3 +1,4 @@
+import { Renderer } from "renderers/Renderer";
 import { Shader } from "./Shader";
 import { VertexShaderProfile } from "./VertexShaderProfile";
 
@@ -14,7 +15,7 @@ export class VertexShader extends Shader
     // override
     public dispose(): void
     {
-        // TODO Renderer.unbindAllVertexShader(this)
+        Renderer.unbindAllVertexShader(this)
         super.dispose()
     }
 

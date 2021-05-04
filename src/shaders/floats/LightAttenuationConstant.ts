@@ -3,7 +3,7 @@ import { Light } from "../../display/Light";
 import { Visual } from "../../display/Visual";
 import { Camera } from "../../display/Camera";
 
-export class LightAttenuationConstand extends ShaderFloat
+export class LightAttenuationConstant extends ShaderFloat
 {
     protected _light: Light
 

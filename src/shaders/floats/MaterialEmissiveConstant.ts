@@ -3,7 +3,7 @@ import { Material } from "../../display/Material";
 import { Visual } from "../../display/Visual";
 import { Camera } from "../../display/Camera";
 
-export class MaterialEmmissiveConstant extends ShaderFloat
+export class MaterialEmissiveConstant extends ShaderFloat
 {
     protected _material: Material
 

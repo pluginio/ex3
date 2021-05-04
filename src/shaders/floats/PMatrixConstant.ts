@@ -2,7 +2,6 @@ import { ShaderFloat } from "./ShaderFloat";
 import { Visual } from "../../display/Visual";
 import { Camera } from "../../display/Camera";
 
-
 export class PMatrixConstant extends ShaderFloat
 {
     public constructor()

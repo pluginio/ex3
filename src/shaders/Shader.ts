@@ -258,7 +258,7 @@ export abstract class Shader implements Disposable
         console.assert(false, "Invalid index")
     }
 
-    public setBaseRegister(profile: number, i: number, baseRegisater: number): void
+    public setBaseRegister(profile: number, i: number, baseRegister: number): void
     {
         if(this._profileOwner)
         {
@@ -266,7 +266,7 @@ export abstract class Shader implements Disposable
             {
                 if(0 <= i && i < this._numConstants)
                 {
-                    this._baseRegister[profile][i] = baseRegisater
+                    this._baseRegister[profile][i] = baseRegister
                 }
                 console.assert(false, "Invalid index")
             }

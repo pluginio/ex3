@@ -240,7 +240,6 @@ export class VertexBufferAccessor implements Disposable
         return this._tCoordChannels[unit]
     }
 
-
     // color
     public setColorAt(unit: number, index: number, data: number[])
     {
@@ -308,12 +307,6 @@ export class VertexBufferAccessor implements Disposable
     {
         return this._blendWeight != 0
     }
-
-
-
-
-
-
 
     private initialize(): void
     {

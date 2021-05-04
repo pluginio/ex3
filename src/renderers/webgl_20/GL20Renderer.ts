@@ -184,7 +184,7 @@ export class GL20Renderer extends Renderer
         }
 
         /**
-         * TODO Replace this entire thing with somthing like:
+         * TODO Replace this entire thing with something like:
          * 
          * if(gl_FragColor.a < 0.5)
          * discard;

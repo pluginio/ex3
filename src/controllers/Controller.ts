@@ -12,7 +12,7 @@ export abstract class Controller
     public active: boolean = true
 
     private _object: ControlledObject = null
-    private _applciationTime: number = -Number.MAX_VALUE
+    private _applicationTime: number = -Number.MAX_VALUE
 
     public get object(): ControlledObject
     {
@@ -27,19 +27,19 @@ export abstract class Controller
 
     public get applicationTime(): number
     {
-        return this._applciationTime
+        return this._applicationTime
     }
 
     public set applicationTime(value: number)
     {
-        this._applciationTime = value
+        this._applicationTime = value
     }
 
     public update(applicationTime: number): boolean
     {
         if(this.active)
         {
-            this._applciationTime = applicationTime
+            this._applicationTime = applicationTime
             return true
         }
         return false

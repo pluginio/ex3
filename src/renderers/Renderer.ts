@@ -1334,7 +1334,7 @@ export abstract class Renderer
         {
             let pass: VisualPass = instance.getPass(i)
             let vParams: ShaderParameters = instance.getVertexParameters(i)
-            let pParams: ShaderParameters = instance.getPixelParameteres(i)
+            let pParams: ShaderParameters = instance.getPixelParameters(i)
             let vShader: VertexShader = pass.vertexShader
             let pShader: PixelShader = pass.pixelShader
 

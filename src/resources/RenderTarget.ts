@@ -2,12 +2,13 @@ import { TextureFormat } from "./TextureFormat";
 import { Texture2D } from "./Texture2D";
 import { Disposable } from "../core/Disposable";
 import { BufferUsage } from "./BufferUsage";
+import { Renderer } from "renderers/Renderer";
 
 export class RenderTarget implements Disposable
 {
     protected _numTargets: number
     protected _colorTextures: Texture2D[] = []
-    protected _depthStencilTexure: Texture2D
+    protected _depthStencilTexture: Texture2D
     protected _hasMipmaps: boolean
 
     public constructor(numTargets: number, tFormat: TextureFormat, width: number, height: number,
@@ -26,13 +27,13 @@ export class RenderTarget implements Disposable
         
         if(hasDepthStencil)
         {
-            this._depthStencilTexure = new Texture2D(TextureFormat.D24S8, width, height, 1, BufferUsage.DEPTHSTENCIL)
+            this._depthStencilTexture = new Texture2D(TextureFormat.D24S8, width, height, 1, BufferUsage.DEPTHSTENCIL)
         }
     }
 
     public dispose(): void
     {
-        // TODO Renderer.unbindAllRenderTarget(this)
+        Renderer.unbindAllRenderTarget(this)
         this._colorTextures = null
     }
 
@@ -63,7 +64,7 @@ export class RenderTarget implements Disposable
 
     public getDepthStencilTexture(): Texture2D
     {
-        return this._depthStencilTexure
+        return this._depthStencilTexture
     }
 
     public get hasMipmaps(): boolean
@@ -73,6 +74,6 @@ export class RenderTarget implements Disposable
 
     public get hasDepthStencil(): boolean
     {
-        return this._depthStencilTexure != null
+        return this._depthStencilTexture != null
     }
 }

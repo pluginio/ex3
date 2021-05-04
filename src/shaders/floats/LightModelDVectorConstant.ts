@@ -17,8 +17,8 @@ export class LightModelDVectorConstant extends ShaderFloat
 
     public update(visual: Visual, camera: Camera): void
     {
-        let worldInvMartrix: Matrix = visual.worldTransform.inverse
-        let modelDVector: Vector = worldInvMartrix.multiplyVector(this._light.dVector)
+        let worldInvMatrix: Matrix = visual.worldTransform.inverse
+        let modelDVector: Vector = worldInvMatrix.multiplyVector(this._light.dVector)
 
         this._data.position = 0
         this._data.writeFloat32(modelDVector.x)
