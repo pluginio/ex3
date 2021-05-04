@@ -1,0 +1,13 @@
+{
+    "include": ["./src/**/*.ts"],
+    "compilerOptions": {
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "target": "es5",
+        "allowJs": true,
+        "baseUrl": "src",
+        "skipLibCheck": true,
+        "lib":["dom"]
+    }
+}
