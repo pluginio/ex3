@@ -97,8 +97,6 @@ console.log("numTriangles: " + mesh.numTriangles)
 let effectInstance: VisualEffectInstance = new DefaultEffect().createInstance()
 renderer.draw(mesh, effectInstance)
 
-
-
 let example: CameraAndLightNodes = new CameraAndLightNodes()
 example.onInitialize()
 */
