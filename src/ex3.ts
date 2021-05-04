@@ -1,19 +1,19 @@
-import { IndexBuffer } from 'resources/IndexBuffer';
-import { BufferUsage } from 'resources/BufferUsage';
-import { RendererInput } from 'renderers/webgl_20/RendererInput';
-import { TextureFormat } from 'resources/TextureFormat';
-import { GL20 } from 'renderers/webgl_20/GL20';
-import { GL20Renderer } from 'renderers/webgl_20/GL20Renderer';
-import { VertexBufferAccessor } from 'resources/VertexBufferAccessor';
-import { VertexFormat } from 'resources/VertexFormat';
-import { AttributeUsage } from 'resources/AttributeUsage';
-import { AttributeType } from 'resources/AttributeType';
-import { VertexBuffer } from 'resources/VertexBuffer';
-import { TriMesh } from 'display/TriMesh';
-import { DefaultEffect } from 'effects/local/DefaultEffect';
-import { VisualEffectInstance } from 'shaders/VisualEffectInstance';
-import { CameraAndLightNodes } from 'examples/CameraAndLightNodes';
-import { Camera } from 'display/Camera';
+import { IndexBuffer } from './resources/IndexBuffer';
+import { BufferUsage } from './resources/BufferUsage';
+import { RendererInput } from './renderers/webgl_20/RendererInput';
+import { TextureFormat } from './resources/TextureFormat';
+import { GL20 } from './renderers/webgl_20/GL20';
+import { GL20Renderer } from './renderers/webgl_20/GL20Renderer';
+import { VertexBufferAccessor } from './resources/VertexBufferAccessor';
+import { VertexFormat } from './resources/VertexFormat';
+import { AttributeUsage } from './resources/AttributeUsage';
+import { AttributeType } from './resources/AttributeType';
+import { VertexBuffer } from './resources/VertexBuffer';
+import { TriMesh } from './display/TriMesh';
+import { DefaultEffect } from './effects/local/DefaultEffect';
+import { VisualEffectInstance } from './shaders/VisualEffectInstance';
+import { CameraAndLightNodes } from './examples/CameraAndLightNodes';
+import { Camera } from './display/Camera';
 
 console.log('Hello EX3')
 
@@ -96,9 +96,9 @@ let mesh: TriMesh = new TriMesh(vFormat, vBuffer, iBuffer)
 console.log("numTriangles: " + mesh.numTriangles)
 let effectInstance: VisualEffectInstance = new DefaultEffect().createInstance()
 renderer.draw(mesh, effectInstance)
-*/
 
-/*
+
+
 let example: CameraAndLightNodes = new CameraAndLightNodes()
 example.onInitialize()
 */
