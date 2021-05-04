@@ -3,7 +3,7 @@ import { Disposable } from "../core/Disposable";
 import { VisualPass } from "./VisualPass";
 import { ShaderParameters } from "./ShaderParameters";
 import { ShaderFloat } from "./floats/ShaderFloat";
-import { Texture } from "resources/Texture";
+import { Texture } from "../resources/Texture";
 import { VisualTechnique } from "./VisualTechnique";
 
 export class VisualEffectInstance implements Disposable {

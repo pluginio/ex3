@@ -1,15 +1,15 @@
 import { Visual } from "./Visual";
 import { PrimitiveType } from "./PrimitiveType";
-import { VertexFormat } from "resources/VertexFormat";
-import { VertexBuffer } from "resources/VertexBuffer";
-import { IndexBuffer } from "resources/IndexBuffer";
-import { Point } from "geom/Point";
-import { Transform } from "geom/Transform";
-import { VertexBufferAccessor } from "resources/VertexBufferAccessor";
-import { Vector } from "geom/Vector";
+import { VertexFormat } from "../resources/VertexFormat";
+import { VertexBuffer } from "../resources/VertexBuffer";
+import { IndexBuffer } from "../resources/IndexBuffer";
+import { Point } from "../geom/Point";
+import { Transform } from "../geom/Transform";
+import { VertexBufferAccessor } from "../resources/VertexBufferAccessor";
+import { Vector } from "../geom/Vector";
 import { UpdateType } from "./UpdateType";
-import { Renderer } from "renderers/Renderer";
-import { AttributeUsage } from "resources/AttributeUsage";
+import { Renderer } from "../renderers/Renderer";
+import { AttributeUsage } from "../resources/AttributeUsage";
 
 export abstract class Triangles extends Visual
 {

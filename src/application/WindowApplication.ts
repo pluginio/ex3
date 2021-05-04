@@ -1,6 +1,6 @@
 import { Application } from "./Application";
-import { Renderer } from "renderers/Renderer";
-import { TextureFormat } from "resources/TextureFormat";
+import { Renderer } from "../renderers/Renderer";
+import { TextureFormat } from "../resources/TextureFormat";
 
 export abstract class WindowApplication extends Application
 {

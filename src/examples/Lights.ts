@@ -1,13 +1,13 @@
-import { WindowApplication3 } from "application/WindowApplication3";
-import { Node } from "display/Node";
-import { WireState } from "shaders/states/WireState";
-import { Culler } from "display/Culler";
-import { Point } from "geom/Point";
-import { Vector } from "geom/Vector";
-import { Light } from "display/Light";
-import { MathExt } from "utils/MathExt";
-import { LightType } from "display/LightType";
-import { Material } from "display/Material";
+import { WindowApplication3 } from "../application/WindowApplication3";
+import { Node } from "../display/Node";
+import { WireState } from "../shaders/states/WireState";
+import { Culler } from "../display/Culler";
+import { Point } from "../geom/Point";
+import { Vector } from "../geom/Vector";
+import { Light } from "../display/Light";
+import { MathExt } from "../utils/MathExt";
+import { LightType } from "../display/LightType";
+import { Material } from "../display/Material";
 
 export class Lights extends WindowApplication3
 {

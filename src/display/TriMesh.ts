@@ -1,9 +1,9 @@
 import { Triangles } from "./Triangles";
 import { PrimitiveType } from "./PrimitiveType";
-import { VertexFormat } from "resources/VertexFormat";
-import { VertexBuffer } from "resources/VertexBuffer";
-import { IndexBuffer } from "resources/IndexBuffer";
-import { ByteArray } from "core/ByteArray";
+import { VertexFormat } from "../resources/VertexFormat";
+import { VertexBuffer } from "../resources/VertexBuffer";
+import { IndexBuffer } from "../resources/IndexBuffer";
+import { ByteArray } from "../core/ByteArray";
 
 export class TriMesh extends Triangles
 {

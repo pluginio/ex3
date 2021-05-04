@@ -1,25 +1,25 @@
 import { RendererInput } from "./RendererInput";
-import { TextureFormat } from "resources/TextureFormat";
-import { Renderer } from "renderers/Renderer";
+import { TextureFormat } from "../../resources/TextureFormat";
+import { Renderer } from "../../renderers/Renderer";
 import { RendererData } from "./RendererData";
-import { VertexShader } from "shaders/VertexShader";
-import { VertexShaderProfile } from "shaders/VertexShaderProfile";
-import { PixelShader } from "shaders/PixelShader";
-import { PixelShaderProfile } from "shaders/PixelShaderProfile";
+import { VertexShader } from "../../shaders/VertexShader";
+import { VertexShaderProfile } from "../../shaders/VertexShaderProfile";
+import { PixelShader } from "../../shaders/PixelShader";
+import { PixelShaderProfile } from "../../shaders/PixelShaderProfile";
 import { GL20 } from "./GL20";
-import { AlphaState } from "shaders/states/AlphaState";
+import { AlphaState } from "../../shaders/states/AlphaState";
 import { GL20Mapping } from "./GL20Mapping";
-import { CullState } from "shaders/states/CullState";
-import { Visual } from "display/Visual";
-import { PrimitiveType } from "display/PrimitiveType";
-import { VertexBuffer } from "resources/VertexBuffer";
-import { IndexBuffer } from "resources/IndexBuffer";
-import { Polysegment } from "display/Polysegment";
-import { Polypoint } from "display/Polypoint";
-import { DepthState } from "shaders/states/DepthState";
-import { OffsetState } from "shaders/states/OffsetState";
-import { StencilState } from "shaders/states/StencilState";
-import { WireState } from "shaders/states/WireState";
+import { CullState } from "../../shaders/states/CullState";
+import { Visual } from "../../display/Visual";
+import { PrimitiveType } from "../../display/PrimitiveType";
+import { VertexBuffer } from "../../resources/VertexBuffer";
+import { IndexBuffer } from "../../resources/IndexBuffer";
+import { Polysegment } from "../../display/Polysegment";
+import { Polypoint } from "../../display/Polypoint";
+import { DepthState } from "../../shaders/states/DepthState";
+import { OffsetState } from "../../shaders/states/OffsetState";
+import { StencilState } from "../../shaders/states/StencilState";
+import { WireState } from "../../shaders/states/WireState";
 
 export class GL20Renderer extends Renderer
 {

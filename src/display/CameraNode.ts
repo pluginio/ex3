@@ -1,8 +1,8 @@
 import { Node } from "./Node";
 import { Camera } from "./Camera";
-import { Matrix } from "geom/Matrix";
-import { Point } from "geom/Point";
-import { Vector } from "geom/Vector";
+import { Matrix } from "../geom/Matrix";
+import { Point } from "../geom/Point";
+import { Vector } from "../geom/Vector";
 
 export class CameraNode extends Node
 {

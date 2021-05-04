@@ -1,5 +1,5 @@
 import { Disposable } from "../core/Disposable";
-import { Pool } from "utils/Pool";
+import { Pool } from "../utils/Pool";
 import { Constants } from "../core/Constants";
 import { Matrix } from "./Matrix";
 import { Vector } from "./Vector";

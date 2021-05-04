@@ -2,7 +2,7 @@ import { TextureFormat } from "./TextureFormat";
 import { Texture2D } from "./Texture2D";
 import { Disposable } from "../core/Disposable";
 import { BufferUsage } from "./BufferUsage";
-import { Renderer } from "renderers/Renderer";
+import { Renderer } from "../renderers/Renderer";
 
 export class RenderTarget implements Disposable
 {

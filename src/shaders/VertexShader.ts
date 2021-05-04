@@ -1,4 +1,4 @@
-import { Renderer } from "renderers/Renderer";
+import { Renderer } from "../renderers/Renderer";
 import { Shader } from "./Shader";
 import { VertexShaderProfile } from "./VertexShaderProfile";
 

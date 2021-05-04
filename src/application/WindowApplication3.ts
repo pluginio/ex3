@@ -1,9 +1,9 @@
 import { WindowApplication } from "./WindowApplication";
-import { Camera } from "display/Camera";
-import { Vector } from "geom/Vector";
-import { Spatial } from "display/Spatial";
-import { Matrix } from "geom/Matrix";
-import { Point } from "geom/Point";
+import { Camera } from "../display/Camera";
+import { Vector } from "../geom/Vector";
+import { Spatial } from "../display/Spatial";
+import { Matrix } from "../geom/Matrix";
+import { Point } from "../geom/Point";
 
 export class WindowApplication3 extends WindowApplication
 {

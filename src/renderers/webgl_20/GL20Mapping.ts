@@ -1,4 +1,4 @@
-import { SamplerType } from "shaders/SamplerType"
+import { SamplerType } from "../../shaders/SamplerType"
 import { GL20 } from "./GL20"
 
 export class GL20Mapping

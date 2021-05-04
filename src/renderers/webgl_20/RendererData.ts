@@ -1,11 +1,11 @@
-import { AlphaState } from "shaders/states/AlphaState";
-import { CullState } from "shaders/states/CullState";
-import { DepthState } from "shaders/states/DepthState";
-import { OffsetState } from "shaders/states/OffsetState";
-import { WireState } from "shaders/states/WireState";
+import { AlphaState } from "../../shaders/states/AlphaState";
+import { CullState } from "../../shaders/states/CullState";
+import { DepthState } from "../../shaders/states/DepthState";
+import { OffsetState } from "../../shaders/states/OffsetState";
+import { WireState } from "../../shaders/states/WireState";
 import { GL20 } from "./GL20";
 import { GL20Mapping } from "./GL20Mapping";
-import { StencilState } from "shaders/states/StencilState";
+import { StencilState } from "../../shaders/states/StencilState";
 
 export class RendererData
 {

@@ -1,6 +1,6 @@
 import { IVertexFormat } from "../../renderers/interfaces/IVertexFormat";
 import { Renderer } from "../Renderer";
-import { VertexFormat } from "resources/VertexFormat";
+import { VertexFormat } from "../../resources/VertexFormat";
 
 export class PdrVertexFormat implements IVertexFormat
 {

@@ -1,4 +1,4 @@
-import { ControlledObject } from 'controllers/ControlledObject'
+import { ControlledObject } from '../controllers/ControlledObject'
 
 export abstract class Controller
 {
