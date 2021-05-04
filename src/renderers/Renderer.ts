@@ -103,7 +103,7 @@ export abstract class Renderer
 
     public _indexBuffer: IIndexBuffer
 
-    private static msRenderes: Renderer[] = []
+    private static msRenderers: Renderer[] = []
 
 
     public initialize(width: number, height: number, colorFormat: TextureFormat,
@@ -145,7 +145,7 @@ export abstract class Renderer
         this._allowBlue = true
         this._allowAlpha = true
 
-        Renderer.msRenderes.push(this)
+        Renderer.msRenderers.push(this)
     }
 
     public terminate(): void
@@ -168,8 +168,8 @@ export abstract class Renderer
         this.destroyAllVertexShaders();
         this.destroyAllPixelShaders();
 
-        let index: number = Renderer.msRenderes.indexOf(this)
-        Renderer.msRenderes[index] = null
+        let index: number = Renderer.msRenderers.indexOf(this)
+        Renderer.msRenderers[index] = null
     }
 
     public get width(): number
@@ -223,21 +223,21 @@ export abstract class Renderer
 
     public static bindAllVertexFormat(vFormat: VertexFormat): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.bindVertexFormat(vFormat)
         });
     }
 
     public unbindVertexFormat(vFormat: VertexFormat): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.unbindVertexFormat(vFormat)
         });
     }
 
     public static unbindAllVertexFormat(vFormat: VertexFormat): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.unbindVertexFormat(vFormat)
         });
     }
@@ -279,7 +279,7 @@ export abstract class Renderer
 
     public static bindAllVertexBuffer(vBuffer: VertexBuffer): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.bindVertexBuffer(vBuffer)
         });
     }
@@ -294,7 +294,7 @@ export abstract class Renderer
 
     public static unbindAllVertexBuffer(vBuffer: VertexBuffer): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.unbindVertexBuffer(vBuffer)
         });
     }
@@ -355,7 +355,7 @@ export abstract class Renderer
 
     public static updateAllVertexBuffer(vBuffer: VertexBuffer): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.updateVertexBuffer(vBuffer)
         });
     }
@@ -374,7 +374,7 @@ export abstract class Renderer
 
     public static bindAllIndexBuffer(iBuffer: IndexBuffer): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.bindIndexBuffer(iBuffer)
         });
     }
@@ -389,7 +389,7 @@ export abstract class Renderer
 
     public static unbindAllIndexBuffer(iBuffer: IndexBuffer): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.unbindIndexBuffer(iBuffer)
         });
     }
@@ -450,7 +450,7 @@ export abstract class Renderer
 
     public static updateAllIndexBuffer(iBuffer: IndexBuffer): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.updateIndexBuffer(iBuffer)
         });
     }
@@ -469,7 +469,7 @@ export abstract class Renderer
 
     public static bindAllTexture1D(texture: Texture1D): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.bindTexture1D(texture)
         });
     }
@@ -484,7 +484,7 @@ export abstract class Renderer
 
     public static unbindAllTexture1D(texture: Texture1D): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.unbindTexture1D(texture)
         });
     }
@@ -545,7 +545,7 @@ export abstract class Renderer
 
     public static updateAllTexture1D(texture: Texture1D, level: number): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.updateTexture1D(texture, level)
         });
     }
@@ -564,7 +564,7 @@ export abstract class Renderer
 
     public static bindAllTexture2D(texture: Texture2D): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.bindTexture2D(texture)
         });
     }
@@ -579,7 +579,7 @@ export abstract class Renderer
 
     public static unbindAllTexture2D(texture: Texture2D): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.unbindTexture2D(texture)
         });
     }
@@ -640,7 +640,7 @@ export abstract class Renderer
 
     public static updateAllTexture2D(texture: Texture2D, level: number): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.updateTexture2D(texture, level)
         });
     }
@@ -658,7 +658,7 @@ export abstract class Renderer
 
     public static bindAllTexture3D(texture: Texture3D): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.bindTexture3D(texture)
         });
     }
@@ -673,7 +673,7 @@ export abstract class Renderer
 
     public static unbindAllTexture3D(texture: Texture3D): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.unbindTexture3D(texture)
         });
     }
@@ -734,7 +734,7 @@ export abstract class Renderer
 
     public static updateAllTexture3D(texture: Texture3D, level: number): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.updateTexture3D(texture, level)
         });
     }
@@ -753,7 +753,7 @@ export abstract class Renderer
 
     public static bindAllTextureCube(texture: TextureCube): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.bindTextureCube(texture)
         });
     }
@@ -768,7 +768,7 @@ export abstract class Renderer
 
     public static unbindAllTextureCube(texture: TextureCube): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.unbindTextureCube(texture)
         });
     }
@@ -829,7 +829,7 @@ export abstract class Renderer
 
     public static updateAllTextureCube(texture: TextureCube, level: number): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.updateTextureCube(texture, level)
         });
     }
@@ -848,7 +848,7 @@ export abstract class Renderer
 
     public static bindAllRenderTarget(renderTarget: RenderTarget): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.bindRenderTarget(renderTarget)
         });
     }
@@ -863,7 +863,7 @@ export abstract class Renderer
 
     public static unbindAllRenderTarget(renderTarget: RenderTarget): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.unbindRenderTarget(renderTarget)
         });
     }
@@ -914,7 +914,7 @@ export abstract class Renderer
 
     public static bindAllVertexShader(vShader: VertexShader): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.bindVertexShader(vShader)
         });
     }
@@ -929,7 +929,7 @@ export abstract class Renderer
 
     public static unbindAllVertexShader(vShader: VertexShader): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.unbindVertexShader(vShader)
         });
     }
@@ -972,7 +972,7 @@ export abstract class Renderer
 
     public static bindAllPixelShader(pShader: PixelShader): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.bindPixelShader(pShader)
         });
     }
@@ -987,7 +987,7 @@ export abstract class Renderer
 
     public static unbindAllPixelShader(pShader: PixelShader): void
     {
-        Renderer.msRenderes.forEach(renderer => {
+        Renderer.msRenderers.forEach(renderer => {
             renderer.unbindPixelShader(pShader)
         });
     }
