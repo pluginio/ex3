@@ -12,7 +12,7 @@ import { OffsetState } from "../../shaders/states/OffsetState";
 import { StencilState } from "../../shaders/states/StencilState";
 import { WireState } from "../../shaders/states/WireState";
 import { VisualTechnique } from "../../shaders/VisualTechnique";
-// import { PVWMatrixConstant } from "../../shaders/floats/PVWMatrixConstant";
+import { PVWMatrixConstant } from "../../shaders/floats/PVWMatrixConstant";
 
 export class DefaultEffect extends VisualEffect
 {
@@ -88,7 +88,7 @@ export class DefaultEffect extends VisualEffect
     public createInstance(): VisualEffectInstance
     {
         let instance: VisualEffectInstance = new VisualEffectInstance(this, 0)
-        // instance.setVertexConstant(0, 0, new PVWMatrixConstant())
+        instance.setVertexConstant(0, 0, new PVWMatrixConstant())
         return instance
     }
 }
