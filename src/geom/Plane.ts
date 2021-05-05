@@ -1,4 +1,4 @@
-import { Constants } from "core/Constants";
+import { Constants } from "../core/Constants";
 import { Pool } from "../utils/Pool";
 import { Point } from "./Point";
 import { Vector } from "./Vector";

@@ -1,4 +1,4 @@
-import {Disposable} from 'core/Disposable'
+import {Disposable} from '../core/Disposable'
 import {Pool} from '../utils/Pool'
 import {Vector} from './Vector'
 import {Constants} from '../core/Constants'

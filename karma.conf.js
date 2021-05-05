@@ -8,7 +8,7 @@ module.exports = function (config) {
             'src/**/*.ts': ['karma-typescript', 'coverage'],
             'test/**/*.ts': ['karma-typescript']
         },
-
+        
         karmaTypescriptConfig: {
             tsconfig: './tsconfig.json',
             include: ['test/**/*.ts', 'src/**/*.ts']
@@ -32,7 +32,7 @@ module.exports = function (config) {
         },
 
         reporters: ['dots', 'coverage', 'karma-typescript'],
-        browsers: ['Chrome'],
+        browsers: ['ChromeHeadless'],
         singleRun: true
     })
 }

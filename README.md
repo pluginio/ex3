@@ -62,7 +62,7 @@ This should start downloading all of the dependencies that are required by the *
 
 The code is now ready to **build**. We already provided a few **build** instructions that use the **webpack** build tool. You can find out more information about **webpack** at: [https://webpack.js.org/](https://webpack.js.org/)
 
-### Developement Build
+### Development Build
 
 To run a development build, we simply run the following instruction in the **terminal**:
 
