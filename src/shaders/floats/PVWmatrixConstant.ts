@@ -5,6 +5,7 @@ import { Matrix } from "../../geom/Matrix";
 
 export class PVWMatrixConstant extends ShaderFloat
 {
+    /*
     public constructor()
     {
         super(4)
@@ -24,4 +25,5 @@ export class PVWMatrixConstant extends ShaderFloat
             this._data.writeFloat32(source[i])
         }
     }
+    */
 }
