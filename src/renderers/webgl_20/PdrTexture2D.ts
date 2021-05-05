@@ -12,26 +12,26 @@ export class PdrTexture2D implements ITexture2D
 
     public dispose(): void
     {
-
+        console.log("Disposing 2d texture")
     }
 
     public enable(renderer: Renderer, textureUnit: number): void
     {
-
+        console.log("Enabling 2d texture")
     }
 
     public disable(renderer: Renderer, textureUnit: number): void
     {
-
+        console.log("Disabling 2d texture")
     }
 
     public lock(level: number, mode: BufferLocking): void
     {
-
+        console.log("Locking 2d texture")
     }
 
     public unlock(level: number): void
     {
-
+        console.log("Unlocking 2d texture")
     }
 }

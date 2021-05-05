@@ -12,26 +12,26 @@ export class PdrTexture3D implements ITexture3D
 
     public dispose(): void
     {
-
+        console.log("Disposing 3d texture")
     }
 
     public enable(renderer: Renderer, textureUnit: number): void
     {
-
+        console.log("Enabling 3d texture")
     }
 
     public disable(renderer: Renderer, textureUnit: number): void
     {
-
+        console.log("Disabling 3d texture")
     }
 
     public lock(level: number, mode: BufferLocking): void
     {
-
+        console.log("Locking 3d texture")
     }
 
     public unlock(level: number): void
     {
-
+        console.log("Unlocking 3d texture")
     }
 }

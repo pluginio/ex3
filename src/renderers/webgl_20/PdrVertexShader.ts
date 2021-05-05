@@ -12,16 +12,16 @@ export class PdrVertexShader implements IVertexShader
 
     public dispose(): void
     {
-
+        console.log("Disposing vertex shader")
     }
 
     public enable(renderer: Renderer, vShader: VertexShader, parameters: ShaderParameters): void
     {
-
+        console.log("Enabling vertex shader")
     }
 
     public disable(renderer: Renderer, vShader: VertexShader, parameters: ShaderParameters): void
     {
-        
+        console.log("Disabling vertex shader")
     }
 }

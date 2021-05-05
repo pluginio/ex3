@@ -12,26 +12,26 @@ export class PdrTexture1D implements ITexture1D
     
     public dispose(): void
     {
-
+        console.log("Disposing 1d texture")
     }
 
     public enable(renderer: Renderer, textureUnit: number): void
     {
-
+        console.log("Enabling 1d texture")
     }
 
     public disable(renderer: Renderer, textureUnit: number): void
     {
-
+        console.log("Disabling 1d texture")
     }
 
     public lock(level: number, mode: BufferLocking): void
     {
-
+        console.log("Locking 1d texture")
     }
 
     public unlock(level: number): void
     {
-
+        console.log("Unlocking 1d texture")
     }
 }

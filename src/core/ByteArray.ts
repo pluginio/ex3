@@ -20,6 +20,8 @@ export class ByteArray implements Disposable
         this._data = null
     }
 
+    
+
     public set endian(value: Endian)
     {
         if(value == Endian.LITTLE_ENDIAN)
@@ -39,6 +41,11 @@ export class ByteArray implements Disposable
             return Endian.LITTLE_ENDIAN
         }
         return Endian.BIG_ENDIAN
+    }
+
+    public get view(): DataView
+    {
+        return this._view
     }
 
     public get position(): number
