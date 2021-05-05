@@ -8,7 +8,7 @@ module.exports = function (config) {
             'src/**/*.ts': ['karma-typescript', 'coverage'],
             'test/**/*.ts': ['karma-typescript']
         },
-
+        exclude: /node_modules/ ,
         karmaTypescriptConfig: {
             tsconfig: './tsconfig.json',
             include: ['test/**/*.ts', 'src/**/*.ts']

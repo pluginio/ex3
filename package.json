@@ -1,7 +1,7 @@
 {
   "name": "ex3",
   "version": "0.0.1",
-  "description": "Real-time 3D game engine for TypeScript.",
+  "description": "Real-time 3D engine for TypeScript.",
   "main": "ex3.js",
   "scripts": {
     "debug": "webpack-dev-server --config webpack.dev.js --host 127.0.0.1 --port 3300 --display-modules --content-base dev --inline --hot --mode development --env.ENVIRONMENT=dev",
