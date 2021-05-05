@@ -32,7 +32,7 @@ module.exports = function (config) {
         },
 
         reporters: ['dots', 'coverage', 'karma-typescript'],
-        browsers: ['Chrome'],
+        browsers: ['ChromeHeadless'],
         singleRun: true
     })
 }
