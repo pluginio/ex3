@@ -7,7 +7,7 @@ export class PdrIndexBuffer implements IIndexBuffer
 {
     public constructor(renderer: Renderer, iBuffer: IndexBuffer)
     {
-        console.log("Creating index buffer - WebGL 1.0")
+        console.log("Creating index buffer - WebGL 2.0")
     }
 
     public dispose(): void
