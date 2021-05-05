@@ -3,7 +3,6 @@ import { VertexShader } from "../../shaders/VertexShader";
 import { VariableType } from "../../shaders/VariableType";
 import { VariableSemantic } from "../../shaders/VariableSemantic";
 import { VisualEffectInstance } from "../../shaders/VisualEffectInstance";
-import { PVWMatrixConstant } from "../../shaders/floats/PVWMatrixConstant";
 import { PixelShader } from "../../shaders/PixelShader";
 import { VisualPass } from "../../shaders/VisualPass";
 import { AlphaState } from "../../shaders/states/AlphaState";
@@ -13,6 +12,7 @@ import { OffsetState } from "../../shaders/states/OffsetState";
 import { StencilState } from "../../shaders/states/StencilState";
 import { WireState } from "../../shaders/states/WireState";
 import { VisualTechnique } from "../../shaders/VisualTechnique";
+import { PVWMatrixConstant } from "../../shaders/floats/PVWMatrixConstant";
 
 export class DefaultEffect extends VisualEffect
 {
