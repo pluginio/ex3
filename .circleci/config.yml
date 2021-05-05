@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10-browsers
+      - image: circleci/node:13-browsers
         environment: 
           CHROME_BIN: "/usr/bin/google-chrome"
 
@@ -34,6 +34,6 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
+          
       # run tests!
       - run: yarn test
