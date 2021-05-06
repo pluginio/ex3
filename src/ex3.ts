@@ -29,7 +29,7 @@ import { Node } from './display/Node';
 console.log('Hello EX3')
 
 /*
-// setup testing
+// TODO: setup testing
 let input: RendererInput = new RendererInput()
 input.mContext = GL20.createContext('ex3-root')
 
@@ -112,7 +112,15 @@ let example: CameraAndLightNodes = new CameraAndLightNodes()
 example.onInitialize()
 */
 
-// setup testing
+
+
+
+
+
+
+
+/*
+// TODO: setup testing
 let input: RendererInput = new RendererInput()
 input.mContext = GL20.createContext('ex3-root')
 
@@ -253,3 +261,4 @@ renderer.clearColor = [0.3, 1, 0.2, 1]
 renderer.clearColorBufferRect(50, 100, 200, 120)
 
 renderer.draw(mesh, effectInstance)
+*/
