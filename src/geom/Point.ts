@@ -137,6 +137,10 @@ export class Point implements Disposable {
         return this.x * p.x + this.y * p.y + this.z * p.z
     }
 
+    public toArray(): number[] {
+        return this._tuple
+    }
+
     public toString(): string {
         return `[Point]
 x: ${this.x.toFixed(8)}, y: ${this.y.toFixed(8)}, z: ${this.z.toFixed(8)}, w: ${this.w.toFixed(8)}`

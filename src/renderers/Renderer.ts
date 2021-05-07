@@ -253,6 +253,7 @@ export abstract class Renderer
         else
         {
             pdrVertexFormat = new this.Resource.vertexFormat(this, vFormat)
+            this._vertexFormats.set(vFormat, pdrVertexFormat)
         }
 
         pdrVertexFormat.enable(this)
@@ -310,6 +311,7 @@ export abstract class Renderer
         else
         {
             pdrVertexBuffer = new this.Resource.vertexBuffer(this, vBuffer)
+            this._vertexBuffers.set(vBuffer, pdrVertexBuffer)
         }
 
         pdrVertexBuffer.enable(this, streamIndex, offset)
@@ -405,6 +407,7 @@ export abstract class Renderer
         else
         {
             pdrIndexBuffer = new this.Resource.indexBuffer(this, iBuffer)
+            this._indexBuffers.set(iBuffer, pdrIndexBuffer)
         }
 
         pdrIndexBuffer.enable(this)
@@ -500,6 +503,7 @@ export abstract class Renderer
         else
         {
             pdrTexture1D = new this.Resource.texture1D(this, texture)
+            this._texture1Ds.set(texture, pdrTexture1D)
         }
 
         pdrTexture1D.enable(this, textureUnit)
@@ -595,6 +599,7 @@ export abstract class Renderer
         else
         {
             pdrTexture2D = new this.Resource.texture2D(this, texture)
+            this._texture2Ds.set(texture, pdrTexture2D)
         }
 
         pdrTexture2D.enable(this, textureUnit)
@@ -689,6 +694,7 @@ export abstract class Renderer
         else
         {
             pdrTexture3D = new this.Resource.texture3D(this, texture)
+            this._texture3Ds.set(texture, pdrTexture3D)
         }
 
         pdrTexture3D.enable(this, textureUnit)
@@ -784,6 +790,7 @@ export abstract class Renderer
         else
         {
             pdrTextureCube = new this.Resource.textureCube(this, texture)
+            this._textureCubes.set(texture, pdrTextureCube)
         }
 
         pdrTextureCube.enable(this, textureUnit)
@@ -879,6 +886,7 @@ export abstract class Renderer
         else
         {
             pdrRenderTarget = new this.Resource.renderTarget(this, renderTarget)
+            this._renderTargets.set(renderTarget, pdrRenderTarget)
         }
 
         pdrRenderTarget.enable(this)
@@ -936,18 +944,19 @@ export abstract class Renderer
 
     public enableVertexShader(vShader: VertexShader, parameters: ShaderParameters): void
     {
-        let pdrvertexShader: IVertexShader
+        let pdrVertexShader: IVertexShader
 
         if(this._vertexShaders.has(vShader))
         {
-            pdrvertexShader = this._vertexShaders.get(vShader)
+            pdrVertexShader = this._vertexShaders.get(vShader)
         }
         else
         {
-            pdrvertexShader = new this.Resource.vertexShader(this, vShader)
+            pdrVertexShader = new this.Resource.vertexShader(this, vShader)
+            this._vertexShaders.set(vShader, pdrVertexShader)
         }
 
-        pdrvertexShader.enable(this, vShader, parameters)
+        pdrVertexShader.enable(this, vShader, parameters)
     }
 
     public disableVertexShader(vShader: VertexShader, parameters: ShaderParameters): void
@@ -1003,6 +1012,7 @@ export abstract class Renderer
         else
         {
             pdrPixelShader = new this.Resource.pixelShader(this, pShader)
+            this._pixelShaders.set(pShader, pdrPixelShader)
         }
 
         pdrPixelShader.enable(this, pShader, parameters)

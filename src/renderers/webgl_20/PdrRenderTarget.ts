@@ -12,21 +12,21 @@ export class PdrRenderTarget implements IRenderTarget
 
     public dispose(): void
     {
-
+        console.log("Disposing render target")
     }
 
     public enable(renderer: Renderer): void
     {
-
+        console.log("Enabling render target")
     }
 
     public disable(renderer: Renderer): void
     {
-
+        console.log("Disabling render target")
     }
 
     public readColor(i: number, renderer: Renderer, texture: Texture2D): void
     {
-
+        console.log("Read color render target")
     }
 }

@@ -4,6 +4,7 @@ import { Disposable } from "../core/Disposable";
 import { AttributeUsage } from "./AttributeUsage";
 import { AttributeType } from "./AttributeType";
 import { ByteArray } from '../core/ByteArray'
+import { Visual } from "../display/Visual";
 
 export class VertexBufferAccessor implements Disposable
 {
@@ -51,6 +52,11 @@ export class VertexBufferAccessor implements Disposable
 
     }
 
+    public static fromVisual(visual: Visual): VertexBufferAccessor
+    {
+        return new VertexBufferAccessor(visual.vertexFormat, visual.vertexBuffer)
+    }
+
     public applyToData(vFormat: VertexFormat, vBuffer: VertexBuffer): void
     {
         this._vFormat = vFormat
@@ -59,7 +65,6 @@ export class VertexBufferAccessor implements Disposable
         this.initialize()
     }
 
-    /*
     public applyToVisual(visual: Visual): void
     {
         this._vFormat = visual.vertexFormat
@@ -67,7 +72,6 @@ export class VertexBufferAccessor implements Disposable
 
         this.initialize()
     }
-    */
 
     public get data(): ByteArray
     {

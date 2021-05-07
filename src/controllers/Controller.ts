@@ -11,7 +11,7 @@ export abstract class Controller
     public frequency: number = 1
     public active: boolean = true
 
-    private _object: ControlledObject = null
+    protected _object: ControlledObject = null
     private _applicationTime: number = -Number.MAX_VALUE
 
     public get object(): ControlledObject
@@ -45,9 +45,9 @@ export abstract class Controller
         return false
     }
 
-    protected get controlTime(): number
+    protected getControlTime(applicationTime: number): number
     {
-        let controlTime = this.frequency * this.applicationTime + this.phase
+        let controlTime = this.frequency * applicationTime + this.phase
 
         if(this.repeat == RepeatType.CLAMP)
         {
