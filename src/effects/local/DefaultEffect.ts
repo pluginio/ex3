@@ -36,8 +36,8 @@ export class DefaultEffect extends VisualEffect
         ""
     ]
 
-    private static msGL10VRegisters: number[] = [0]
-    private static msGL20VRegisters: number[] = [1]
+    public static msGL10VRegisters: number[] = [0]
+    public static msGL20VRegisters: number[] = [1]
 
     private static msVRegisters:number[][] = [
         null,
@@ -47,7 +47,7 @@ export class DefaultEffect extends VisualEffect
         DefaultEffect.msGL20VRegisters,
     ]
 
-    constructor()
+    public constructor()
     {
         super()
 
