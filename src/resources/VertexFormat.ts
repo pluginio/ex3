@@ -2,6 +2,7 @@ import { AttributeType } from "./AttributeType";
 import { AttributeUsage } from "./AttributeUsage";
 import { Disposable } from "../core/Disposable";
 import { Attribute } from "./Attribute";
+import { Renderer } from "renderers/Renderer";
 
 export class VertexFormat implements Disposable
 {
@@ -72,7 +73,7 @@ export class VertexFormat implements Disposable
 
     public dispose(): void
     {
-        //TODO Renderer.UnbindAllVertexFormat()
+        Renderer.unbindAllVertexFormat(this)
     }
 
     public setAttribute(attribute: number, streamIndex: number, offset: number, type: AttributeType,

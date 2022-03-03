@@ -4,6 +4,7 @@ import { BufferUsage } from "./BufferUsage";
 import { TextureType } from "./TextureType";
 import { ByteArray } from "../core/ByteArray";
 import { MathExt } from "../utils/MathExt";
+import { Renderer } from "../renderers/Renderer";
 
 export class TextureCube extends Texture
 {
@@ -40,7 +41,7 @@ export class TextureCube extends Texture
 
     public dispose(): void
     {
-        // Renderer.unbindAllTextureCube(this)
+        Renderer.unbindAllTextureCube(this)
         super.dispose()
     }
 

@@ -1,3 +1,4 @@
+import { Renderer } from "../renderers/Renderer";
 import { Buffer } from "./Buffer"
 import { BufferUsage } from "./BufferUsage";
 
@@ -10,7 +11,7 @@ export class VertexBuffer extends Buffer
 
     public dispose(): void
     {
-        // TODO Renderer.unbindAllVertexBuffer(this)
+        Renderer.unbindAllVertexBuffer(this)
         super.dispose()
     }
 }

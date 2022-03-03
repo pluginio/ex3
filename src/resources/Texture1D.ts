@@ -4,6 +4,7 @@ import { BufferUsage } from './BufferUsage'
 import { ByteArray } from '../core/ByteArray'
 import { TextureType } from './TextureType'
 import { MathExt } from '../utils/MathExt'
+import { Renderer } from '../renderers/Renderer'
 
 export class Texture1D extends Texture
 {
@@ -37,7 +38,7 @@ export class Texture1D extends Texture
 
     public dispose(): void
     {
-        // TODO Renderer.unbindAllTexture1D(this)
+        Renderer.unbindAllTexture1D(this)
         super.dispose()
     }
 

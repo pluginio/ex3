@@ -20,7 +20,14 @@ export class ByteArray implements Disposable
         this._data = null
     }
 
-    
+    public static fromArrayBuffer(buffer: ArrayBuffer): ByteArray
+    {
+        let byteArray: ByteArray = new ByteArray(0)
+        byteArray._data = buffer
+        byteArray._view = new DataView(byteArray._data)
+
+        return byteArray
+    }
 
     public set endian(value: Endian)
     {

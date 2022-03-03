@@ -25,8 +25,38 @@ import { CameraNode } from './display/CameraNode';
 import { PVWMatrixConstant } from './shaders/floats/PVWMatrixConstant';
 import { Culler } from './display/Culler';
 import { Node } from './display/Node';
+import { ParserAdapter3ds } from 'parsers/max3ds/ParserAdapter3ds';
+import { ByteArray } from 'core/ByteArray';
 
 console.log('Hello EX3')
+let fileSelect: HTMLInputElement = document.getElementById('file-select') as HTMLInputElement
+
+fileSelect.addEventListener('change', async (e) => {
+    let files = (e.target as HTMLInputElement).files
+    console.log("Files", files)
+
+    let file = files[0]
+
+    try{
+        let buffer = await file.arrayBuffer()
+        console.log("Length: ", buffer.byteLength)
+
+        let data: ByteArray = ByteArray.fromArrayBuffer(buffer)
+        console.log(data.length)
+        
+        let adapter3ds: ParserAdapter3ds = new ParserAdapter3ds(data, false, false, false, false)
+        adapter3ds.parse()
+
+        console.log("Mesh length: ", adapter3ds.meshes.length)
+        console.log("vBuffer: ", adapter3ds.getMeshtAt(0).vertexBuffer.numElements)
+        console.log("iBuffer: ", adapter3ds.getMeshtAt(0).indexBuffer.numElements)
+    }
+    catch(e)
+    {
+        console.log("Something went wrong", e.message)
+    }
+}, false)
+
 
 /*
 // TODO: setup testing

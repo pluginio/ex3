@@ -6,7 +6,7 @@ export class ChunkInfo
 	public id: number = 0;
 	public name: string = "";
 	
-	public constructor( known: boolean, id: number, name: string )
+	public constructor(known: boolean, id: number, name: string)
 	{
 		this.known = known;
 		this.id = id;
@@ -103,7 +103,7 @@ export class Decode3ds
 
     private static _ChunkInfo: ChunkInfo[] =
 		[
-			new ChunkInfo(true,  this.CHUNK_M3DMAGIC,     "M3DMAGIC"              ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_M3DMAGIC,     "M3DMAGIC"              ),
 			new ChunkInfo(false, 0x2D2D,                  "SMAGIC"                ),
 			new ChunkInfo(false, 0x2D3D,                  "LMAGIC"                ),
 			new ChunkInfo(false, 0x3DAA,                  "MLIBMAGIC"             ),
@@ -113,7 +113,7 @@ export class Decode3ds
 			
 			// Mesh Chunk Ids
 			
-			new ChunkInfo(true,  this.CHUNK_MDATA,        "MDATA"                 ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_MDATA,        "MDATA"                 ),
 			new ChunkInfo(false, 0x3D3E,                  "MESH_VERSION"          ),
 			new ChunkInfo(false, 0x0010,                  "COLOR_F"               ),
 			new ChunkInfo(false, 0x0011,                  "COLOR_24"              ),
@@ -163,7 +163,7 @@ export class Decode3ds
 			new ChunkInfo(false, 0x3080,                  "VIEW_CAMERA"           ),
 			new ChunkInfo(false, 0x3090,                  "VIEW_WINDOW"           ),
 			
-			new ChunkInfo(true,  this.CHUNK_NAMED_OBJECT, "NAMED_OBJECT"          ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_NAMED_OBJECT, "NAMED_OBJECT"          ),
 			new ChunkInfo(false, 0x4010,                  "OBJ_HIDDEN"            ),
 			new ChunkInfo(false, 0x4011,                  "OBJ_VIS_LOFTER"        ),
 			new ChunkInfo(false, 0x4012,                  "OBJ_DOESNT_CAST"       ),
@@ -173,19 +173,19 @@ export class Decode3ds
 			new ChunkInfo(false, 0x4016,                  "OBJ_FROZEN"            ),
 			new ChunkInfo(false, 0x4017,                  "OBJ_DONT_RCVSHADOW"    ),
 			
-			new ChunkInfo(true,  this.CHUNK_N_TRI_OBJECT, "N_TRI_OBJECT"          ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_N_TRI_OBJECT, "N_TRI_OBJECT"          ),
 			
-			new ChunkInfo(true,  this.CHUNK_POINT_ARRAY,  "POINT_ARRAY"           ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_POINT_ARRAY,  "POINT_ARRAY"           ),
 			new ChunkInfo(false, 0x4111,                  "POINT_FLAG_ARRAY"      ),
-			new ChunkInfo(true,  this.CHUNK_FACE_ARRAY,   "FACE_ARRAY"            ),
-			new ChunkInfo(true,  this.CHUNK_MSH_MAT_GROUP,"MSH_MAT_GROUP"         ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_FACE_ARRAY,   "FACE_ARRAY"            ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_MSH_MAT_GROUP,"MSH_MAT_GROUP"         ),
 			new ChunkInfo(false, 0x4131,                  "OLD_MAT_GROUP"         ),
-			new ChunkInfo(true,  this.CHUNK_TEX_VERTS,    "TEX_VERTS"             ),
-			new ChunkInfo(true,  this.CHUNK_SMOOTH_GROUP, "SMOOTH_GROUP"          ),
-			new ChunkInfo(true,  this.CHUNK_MESH_MATRIX,  "MESH_MATRIX"           ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_TEX_VERTS,    "TEX_VERTS"             ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_SMOOTH_GROUP, "SMOOTH_GROUP"          ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_MESH_MATRIX,  "MESH_MATRIX"           ),
 			new ChunkInfo(false, 0x4165,                  "MESH_COLOR"            ),
 	//		new ChunkInfo(true,  CHUNK_MESH_COLOR,        "MESH_COLOR"            ),
-			new ChunkInfo(true,  this.CHUNK_MESH_TEXTURE_INFO, "MESH_TEXTURE_INFO"),
+			new ChunkInfo(true,  Decode3ds.CHUNK_MESH_TEXTURE_INFO, "MESH_TEXTURE_INFO"),
 			new ChunkInfo(false, 0x4181,                  "PROC_NAME"             ),
 			new ChunkInfo(false, 0x4182,                  "PROC_DATA"             ),
 			new ChunkInfo(false, 0x4190,                  "MSH_BOXMAP"            ),
@@ -217,10 +217,10 @@ export class Decode3ds
 			
 			new ChunkInfo(false, 0x4680,                  "N_AMBIENT_LIGHT"       ),
 			
-			new ChunkInfo(true,  this.CHUNK_N_CAMERA,     "N_CAMERA"              ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_N_CAMERA,     "N_CAMERA"              ),
 			new ChunkInfo(false, 0x4710,                  "CAM_SEE_CONE"          ),
 	//		new ChunkInfo(true,  CHUNK_CAM_SEE_CONE,      "CAM_SEE_CONE"          ),
-			new ChunkInfo(true,  this.CHUNK_CAM_RANGES,   "CAM_RANGES"            ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_CAM_RANGES,   "CAM_RANGES"            ),
 			
 			new ChunkInfo(false, 0x4F00,                  "HIERARCHY"             ),
 			new ChunkInfo(false, 0x4F10,                  "PARENT_OBJECT"         ),
@@ -295,8 +295,8 @@ export class Decode3ds
 			
 			// Material Chunk IDs
 			
-			new ChunkInfo(true,  this.CHUNK_MAT_ENTRY,    "MAT_ENTRY"             ),
-			new ChunkInfo(true,  this.CHUNK_MAT_NAME,     "MAT_NAME"              ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_MAT_ENTRY,    "MAT_ENTRY"             ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_MAT_NAME,     "MAT_NAME"              ),
 			new ChunkInfo(false, 0xA010,                  "MAT_AMBIENT"           ),
 			new ChunkInfo(false, 0xA020,                  "MAT_DIFFUSE"           ),
 			new ChunkInfo(false, 0xA030,                  "MAT_SPECULAR"          ),
@@ -377,35 +377,35 @@ export class Decode3ds
 			
 			// Keyframe Chunk IDs
 			
-			new ChunkInfo(true,  this.CHUNK_KFDATA,       "KFDATA"                ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_KFDATA,       "KFDATA"                ),
 			new ChunkInfo(false, 0xB00A,                  "KFHDR"                 ),
 			new ChunkInfo(false, 0xB001,                  "AMBIENT_NODE_TAG"      ),
 			// new ChunkInfo(true,  CHUNK_AMBIENT_NODE_TAG,  "AMBIENT_NODE_TAG"   ),
-			new ChunkInfo(true,  this.CHUNK_OBJECT_NODE_TAG,"OBJECT_NODE_TAG"     ),
-			new ChunkInfo(true,  this.CHUNK_CAMERA_NODE_TAG,"CAMERA_NODE_TAG"     ),
-			new ChunkInfo(true,  this.CHUNK_TARGET_NODE_TAG,"TARGET_NODE_TAG"     ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_OBJECT_NODE_TAG,"OBJECT_NODE_TAG"     ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_CAMERA_NODE_TAG,"CAMERA_NODE_TAG"     ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_TARGET_NODE_TAG,"TARGET_NODE_TAG"     ),
 			new ChunkInfo(false, 0xB005,                  "LIGHT_NODE_TAG"        ),
 			new ChunkInfo(false, 0xB006,                  "L_TARGET_NODE_TAG"     ),
 			new ChunkInfo(false, 0xB007,                  "SPOTLIGHT_NODE_TAG"    ),
 			
-			new ChunkInfo(true,  this.CHUNK_KFSEG,        "KFSEG"                 ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_KFSEG,        "KFSEG"                 ),
 			new ChunkInfo(false, 0xB009,                  "KFCURTIME"             ),
-			new ChunkInfo(true,  this.CHUNK_NODE_HDR,      "NODE_HDR"             ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_NODE_HDR,      "NODE_HDR"             ),
 			new ChunkInfo(false, 0xB011,                  "INSTANCE_NAME"         ),
 			new ChunkInfo(false, 0xB012,                  "PRESCALE"              ),
-			new ChunkInfo(true,  this.CHUNK_PIVOT,        "PIVOT"                 ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_PIVOT,        "PIVOT"                 ),
 			new ChunkInfo(false, 0xB014,                  "BOUNDBOX"              ),
 			new ChunkInfo(false, 0xB015,                  "MORPH_SMOOTH"          ),
-			new ChunkInfo(true,  this.CHUNK_POS_TRACK_TAG,"POS_TRACK_TAG"         ),
-			new ChunkInfo(true,  this.CHUNK_ROT_TRACK_TAG,"ROT_TRACK_TAG"         ),
-			new ChunkInfo(true,  this.CHUNK_SCL_TRACK_TAG,"SCL_TRACK_TAG"         ),
-			new ChunkInfo(true,  this.CHUNK_FOV_TRACK_TAG,"FOV_TRACK_TAG"         ),
-			new ChunkInfo(true,  this.CHUNK_ROLL_TRACK_TAG,"ROLL_TRACK_TAG"       ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_POS_TRACK_TAG,"POS_TRACK_TAG"         ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_ROT_TRACK_TAG,"ROT_TRACK_TAG"         ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_SCL_TRACK_TAG,"SCL_TRACK_TAG"         ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_FOV_TRACK_TAG,"FOV_TRACK_TAG"         ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_ROLL_TRACK_TAG,"ROLL_TRACK_TAG"       ),
 			new ChunkInfo(false, 0xB025,                  "COL_TRACK_TAG"         ),
-			new ChunkInfo(true,  this.CHUNK_MORPH_TRACK_TAG,"MORPH_TRACK_TAG"     ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_MORPH_TRACK_TAG,"MORPH_TRACK_TAG"     ),
 			new ChunkInfo(false, 0xB027,                  "HOT_TRACK_TAG"         ),
 			new ChunkInfo(false, 0xB028,                  "FALL_TRACK_TAG"        ),
-			new ChunkInfo(true,  this.CHUNK_HIDE_TRACK_TAG,"HIDE_TRACK_TAG"       ),
-			new ChunkInfo(true,  this.CHUNK_NODE_ID,       "NODE_ID"              )
+			new ChunkInfo(true,  Decode3ds.CHUNK_HIDE_TRACK_TAG,"HIDE_TRACK_TAG"       ),
+			new ChunkInfo(true,  Decode3ds.CHUNK_NODE_ID,       "NODE_ID"              )
 		]
 }

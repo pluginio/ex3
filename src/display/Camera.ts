@@ -41,7 +41,7 @@ export class Camera implements Disposable
 
     private _validateCameraFrame: boolean
 
-    public constructor(isPerspective: boolean)
+    public constructor(isPerspective: boolean = true)
     {
         this._isPerspective = isPerspective
         this._depthType = Camera.msDefaultDepthType

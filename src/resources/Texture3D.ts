@@ -4,6 +4,7 @@ import { BufferUsage } from "./BufferUsage";
 import { TextureType } from "./TextureType";
 import { MathExt } from "../utils/MathExt";
 import { ByteArray } from "../core/ByteArray";
+import { Renderer } from "../renderers/Renderer";
 
 export class Texture3D extends Texture
 {
@@ -50,7 +51,7 @@ export class Texture3D extends Texture
 
     public dispose(): void
     {
-        // Renderer.unbindAllTexture3D(this)
+        Renderer.unbindAllTexture3D(this)
         super.dispose()
     }
 

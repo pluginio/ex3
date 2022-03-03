@@ -5,6 +5,8 @@ import { Color3ds } from "./Color3ds"
 import { Decode3ds } from "./Decode3ds"
 import { Face3ds } from "./Face3ds"
 import { FaceMaterial3ds } from "./FaceMaterial3ds"
+import { HideKey3ds } from "./HideKey3ds"
+import { HideKeyTrack3ds } from "./HideKeyTrack3ds"
 import { Light3ds } from "./Light3ds"
 import { Material3ds } from "./Material3ds"
 import { Mesh3ds } from "./Mesh3ds"
@@ -35,6 +37,74 @@ class Head
 
 export class Scene3ds
 {
+    public static CHUNK_COL_RGB: number = 0x0010;
+    public static CHUNK_COL_TRU: number = 0x0011;
+    public static CHUNK_COL_LINRGB: number = 0x0012;
+    public static CHUNK_COL_LINTRU: number = 0x0013;
+    
+    public static CHUNK_PERCENTW: number = 0x0030;		// int2   percentage
+    public static CHUNK_PERCENTF: number = 0x0031;		// float4  percentage
+    
+    public static CHUNK_M3DMAGIC: number = 0x4D4D;
+    public static CHUNK_MDATA: number = 0x3D3D;
+    public static CHUNK_MAT_ENTRY: number = 0xAFFF;
+    public static CHUNK_MAT_NAME: number = 0xA000;
+    public static CHUNK_MAT_AMBIENT: number = 0xA010;
+    public static CHUNK_MAT_DIFFUSE: number = 0xA020;
+    public static CHUNK_MAT_SPECULAR: number = 0xA030;
+    public static CHUNK_MAT_SHININESS: number = 0xA041;
+    public static CHUNK_MAT_TRANSPARENCY: number = 0xA050;
+    public static CHUNK_MAT_MAP: number = 0xA200;
+    public static CHUNK_MAT_MAPNAME: number = 0xA300;
+    public static CHUNK_NAMED_OBJECT: number = 0x4000;
+    public static CHUNK_N_TRI_OBJECT: number = 0x4100;
+    public static CHUNK_POINT_ARRAY: number = 0x4110;
+    public static CHUNK_TEX_VERTS: number = 0x4140;
+    public static CHUNK_MESH_TEXTURE_INFO: number = 0x4170;
+    public static CHUNK_MESH_MATRIX: number = 0x4160;
+    public static CHUNK_MESH_COLOR: number = 0x4165;
+    public static CHUNK_FACE_ARRAY: number = 0x4120;
+    public static CHUNK_MSH_MAT_GROUP: number = 0x4130;
+    public static CHUNK_SMOOTH_GROUP: number = 0x4150;
+    public static CHUNK_N_LIGHT: number = 0x4600;
+    public static CHUNK_LIT_SPOT: number = 0x4610;
+    public static CHUNK_LIT_OFF: number = 0x4620;
+    public static CHUNK_LIT_ATTENUATE: number = 0x4625;
+    public static CHUNK_LIT_RAYSHAD: number = 0x4627;
+    public static CHUNK_LIT_SHADOWED: number = 0x4630;
+    public static CHUNK_LIT_LOCAL_SHADOW: number = 0x4640;
+    public static CHUNK_LIT_LOCAL_SHADOW2: number = 0x4641;
+    public static CHUNK_LIT_SEE_CONE: number = 0x4650;
+    public static CHUNK_LIT_SPOT_RECTANGULAR: number = 0x4651;
+    public static CHUNK_LIT_SPOT_OVERSHOOT: number = 0x4652;
+    public static CHUNK_LIT_SPOT_PROJECTOR: number = 0x4653;
+    public static CHUNK_LIT_SPOT_RANGE: number = 0x4655;
+    public static CHUNK_LIT_SPOT_ROLL: number = 0x4656;
+    public static CHUNK_LIT_SPOT_ASPECT: number = 0x4657;
+    public static CHUNK_LIT_RAY_BIAS: number = 0x4658;
+    public static CHUNK_LIT_INNER_RANGE: number = 0x4659;
+    public static CHUNK_LIT_OUTER_RANGE: number = 0x465A;
+    public static CHUNK_LIT_MULTIPLIER: number = 0x465B;
+    public static CHUNK_N_CAMERA: number = 0x4700;
+    public static CHUNK_CAM_SEE_CONE: number = 0x4710;
+    public static CHUNK_CAM_RANGES: number = 0x4720;
+    public static CHUNK_KFDATA: number = 0xB000;
+    public static CHUNK_KFSEG: number = 0xB008;
+    public static CHUNK_OBJECT_NODE_TAG: number = 0xB002;
+    public static CHUNK_NODE_ID: number = 0xB030;
+    public static CHUNK_NODE_HDR: number = 0xB010;
+    public static CHUNK_PIVOT: number = 0xB013;
+    public static CHUNK_POS_TRACK_TAG: number = 0xB020;
+    public static CHUNK_ROT_TRACK_TAG: number = 0xB021;
+    public static CHUNK_SCL_TRACK_TAG: number = 0xB022;
+    public static CHUNK_MORPH_TRACK_TAG: number = 0xB026;
+    public static CHUNK_HIDE_TRACK_TAG: number = 0xB029;
+    public static CHUNK_TARGET_NODE_TAG: number = 0xB004;
+    public static CHUNK_CAMERA_NODE_TAG: number = 0xB003;
+    public static CHUNK_FOV_TRACK_TAG: number = 0xB023;
+    public static CHUNK_ROLL_TRACK_TAG: number = 0xB024;
+    // public static CHUNK_AMBIENT_NODE_TAG: number = 0xB001;
+    
     public static DECODE_ALL: number = 3
     public static DECODE_USED_PARAMS: number = 2
     public static DECODE_USED_PARAMS_AND_CHUNKS: number = 1
@@ -237,7 +307,7 @@ export class Scene3ds
         return str;
     }
 
-    private read3DS(): void
+    private read3ds(): void
     {
         let head: Head = this.read_HEAD();
         
@@ -330,10 +400,10 @@ export class Scene3ds
             
             switch(head.id)
             {
-                case Decode3ds.CHUNK_COL_RGB:
+                case Scene3ds.CHUNK_COL_RGB:
                         lvColor = this.readRGBColor();
                     break;
-                case Decode3ds.CHUNK_COL_TRU:
+                case Scene3ds.CHUNK_COL_TRU:
                         lvColor = this.readTrueColor();
                     break;
                 default:
@@ -366,11 +436,11 @@ export class Scene3ds
             let head: Head = this.read_HEAD();
             switch(  head.id )
             {
-                case Decode3ds.CHUNK_PERCENTW:
+                case Scene3ds.CHUNK_PERCENTW:
                         let trans: number = this._fileData.readUint16();
                         val = ( trans / 100 );
                     break;
-                case Decode3ds.CHUNK_PERCENTF:
+                case Scene3ds.CHUNK_PERCENTF:
                         val = this._fileData.readFloat32()
                     break;
                 default:
@@ -404,33 +474,33 @@ export class Scene3ds
             let head: Head = this.read_HEAD();
             switch( head.id )
             {
-                case CHUNK_MAT_NAME:
+                case Scene3ds.CHUNK_MAT_NAME:
                         mat.name = this.read_NAME();
                     break;
-                case CHUNK_MAT_AMBIENT:
+                case Scene3ds.CHUNK_MAT_AMBIENT:
                         mat.ambient = this.readColor( head.length - 6 );
                     break;
-                case CHUNK_MAT_SPECULAR:
+                case Scene3ds.CHUNK_MAT_SPECULAR:
                         mat.specular = this.readColor( head.length - 6 );
                     break;
-                case CHUNK_MAT_DIFFUSE:
+                case Scene3ds.CHUNK_MAT_DIFFUSE:
                         mat.diffuse = this.readColor( head.length - 6 );
                     break;
-                case CHUNK_MAT_MAPNAME:
+                case Scene3ds.CHUNK_MAT_MAPNAME:
                         mat.mapName = this.read_NAME();
                     break;
-                case CHUNK_MAT_MAP:
-                    this.read_MAT_ENTRY( head.length - 6 );
+                case Scene3ds.CHUNK_MAT_MAP:
+                        this.read_MAT_ENTRY( head.length - 6 );
                     break;
-                //case CHUNK_MAT_SHININESS:
+                //case Scene3ds.CHUNK_MAT_SHININESS:
                         //mat._shininess = readFloat();
                     //break;
-                case CHUNK_MAT_TRANSPARENCY:
+                case Scene3ds.CHUNK_MAT_TRANSPARENCY:
                         mat.transparency = this.readPercentage( head.length - 6 );
                         mat.transparency = 1 - mat.transparency;
                     break;
                 default:
-                    this.skipChunk( head.length - 6 );
+                        this.skipChunk( head.length - 6 );
                     break;
             }
             
@@ -445,7 +515,7 @@ export class Scene3ds
     {
         let chunkEnd: number = this._fileData.position + chunkLength;
         
-        let name: String = this.read_NAME();
+        let name: string = this.read_NAME();
         
         if (this._decode )
         {
@@ -457,13 +527,13 @@ export class Scene3ds
             let head: Head = this.read_HEAD();
             switch( head.id )
             {
-                case CHUNK_N_TRI_OBJECT:
+                case Scene3ds.CHUNK_N_TRI_OBJECT:
                     this.read_N_TRI_OBJECT( name, head.length - 6 );
                     break;
-                case CHUNK_N_LIGHT:
+                case Scene3ds.CHUNK_N_LIGHT:
                     this.read_N_LIGHT( name, head.length - 6 );
                     break;
-                case CHUNK_N_CAMERA:
+                case Scene3ds.CHUNK_N_CAMERA:
                     this.read_N_CAMERA( name, head.length - 6 );
                     break;
                 default:
@@ -501,51 +571,51 @@ export class Scene3ds
             let head: Head = this.read_HEAD();
             switch( head.id )
             {
-                case CHUNK_LIT_RAYSHAD:
+                case Scene3ds.CHUNK_LIT_RAYSHAD:
                     // (readUnsignedShort() > 0);
                         pLight.rayShadows = true;
                     break;
-                case CHUNK_LIT_SHADOWED:
+                case Scene3ds.CHUNK_LIT_SHADOWED:
                     // (readUnsignedShort() > 0);
                         pLight.shadowed = true;
                     break;
-                case CHUNK_LIT_LOCAL_SHADOW:
+                case Scene3ds.CHUNK_LIT_LOCAL_SHADOW:
                         this._fileData.readFloat32();
                         this._fileData.readFloat32();
                         this._fileData.readFloat32();
                     break;
-                case CHUNK_LIT_LOCAL_SHADOW2:
+                case Scene3ds.CHUNK_LIT_LOCAL_SHADOW2:
                         pLight.shadowBias = this._fileData.readFloat32();
                         pLight.shadowFilter = this._fileData.readFloat32();
                         pLight.shadowSize = this._fileData.readFloat32();
                     break;
-                case CHUNK_LIT_SEE_CONE:
+                case Scene3ds.CHUNK_LIT_SEE_CONE:
                     // (readUnsignedShort() > 0);
                         pLight.cone = true;
                     break;
-                case CHUNK_LIT_SPOT_RECTANGULAR:
+                case Scene3ds.CHUNK_LIT_SPOT_RECTANGULAR:
                     // (readUnsignedShort() > 0);
                         pLight.rectangular = true;
                     break;
-                case CHUNK_LIT_SPOT_OVERSHOOT:
+                case Scene3ds.CHUNK_LIT_SPOT_OVERSHOOT:
                     // (readUnsignedShort() > 0);
                     pLight.overshoot = true;
                     break;
-                case CHUNK_LIT_SPOT_PROJECTOR:
+                case Scene3ds.CHUNK_LIT_SPOT_PROJECTOR:
                     // (readUnsignedShort() > 0);
                         pLight.projector = true;
                         pLight.name = this.read_NAME( 64 );
                     break;
-                case CHUNK_LIT_SPOT_RANGE:
+                case Scene3ds.CHUNK_LIT_SPOT_RANGE:
                     this._fileData.readFloat32();
                     break;
-                case CHUNK_LIT_SPOT_ROLL:
+                case Scene3ds.CHUNK_LIT_SPOT_ROLL:
                         pLight.aspect = this._fileData.readFloat32();
                     break;
-                case CHUNK_LIT_SPOT_ASPECT:
+                case Scene3ds.CHUNK_LIT_SPOT_ASPECT:
                         pLight.rayBias = this._fileData.readFloat32();
                     break;
-                case CHUNK_LIT_RAY_BIAS:
+                case Scene3ds.CHUNK_LIT_RAY_BIAS:
                         pLight.rayBias = this._fileData.readFloat32();
                     break;
                 default:
@@ -584,30 +654,30 @@ export class Scene3ds
             let head: Head = this.read_HEAD();
             switch( head.id )
             {
-                case CHUNK_LIT_OFF:
+                case Scene3ds.CHUNK_LIT_OFF:
                         lit.off = (this._fileData.readUint16() > 0 );
                     break;
-                case CHUNK_LIT_SPOT:
+                case Scene3ds.CHUNK_LIT_SPOT:
                         this.readSpotChunk( lit, head.length - 6 );
                     break;
-                case CHUNK_COL_RGB:
-                case CHUNK_COL_LINRGB:
+                case Scene3ds.CHUNK_COL_RGB:
+                case Scene3ds.CHUNK_COL_LINRGB:
                         lit.color = this.readRGBColor();
                     break;
-                case CHUNK_COL_TRU:
-                case CHUNK_COL_LINTRU:
+                case Scene3ds.CHUNK_COL_TRU:
+                case Scene3ds.CHUNK_COL_LINTRU:
                         lit.color = this.readTrueColor();
                     break;
-                case CHUNK_LIT_ATTENUATE:
+                case Scene3ds.CHUNK_LIT_ATTENUATE:
                         lit.attenuation = this._fileData.readFloat32();
                     break;
-                case CHUNK_LIT_INNER_RANGE:
+                case Scene3ds.CHUNK_LIT_INNER_RANGE:
                         lit.innerRange = this._fileData.readFloat32();
                     break;
-                case CHUNK_LIT_OUTER_RANGE:
+                case Scene3ds.CHUNK_LIT_OUTER_RANGE:
                         lit.outerRange = this._fileData.readFloat32();
                     break;
-                case CHUNK_LIT_MULTIPLIER:
+                case Scene3ds.CHUNK_LIT_MULTIPLIER:
                         lit.multiplexer = this._fileData.readFloat32();
                     break;
                 default:
@@ -677,10 +747,10 @@ export class Scene3ds
             let head: Head = this.read_HEAD();
             switch( head.id )
             {
-                case CHUNK_CAM_RANGES:
+                case Scene3ds.CHUNK_CAM_RANGES:
                         this.read_CAM_RANGES( cam );
                     break;
-                case CHUNK_CAM_SEE_CONE:
+                case Scene3ds.CHUNK_CAM_SEE_CONE:
                 default:
                         this.skipChunk( head.length - 6 );
                     break;
@@ -726,19 +796,19 @@ export class Scene3ds
             let head: Head = this.read_HEAD();
             switch( head.id )
             {
-                case CHUNK_POINT_ARRAY:
+                case Scene3ds.CHUNK_POINT_ARRAY:
                         mes.vertices = this.read_POINT_ARRAY();
                     break;
-                case CHUNK_TEX_VERTS:
+                case Scene3ds.CHUNK_TEX_VERTS:
                         mes.texCoords = this.read_TEX_VERTS();
                     break;
-                case CHUNK_MESH_TEXTURE_INFO:
+                case Scene3ds.CHUNK_MESH_TEXTURE_INFO:
                         this.read_MESH_TEXTURE_INFO( mes );
                     break;
-                case CHUNK_MESH_MATRIX:
+                case Scene3ds.CHUNK_MESH_MATRIX:
                         this.readMatrix( mes.localSystem );
                     break;
-                case CHUNK_FACE_ARRAY:
+                case Scene3ds.CHUNK_FACE_ARRAY:
                         this.read_FACE_ARRAY( mes, head.length - 6 );
                     break;
                 default:
@@ -912,10 +982,10 @@ export class Scene3ds
             let head: Head = this.read_HEAD();
             switch( head.id )
             {
-                case CHUNK_MSH_MAT_GROUP:
+                case Scene3ds.CHUNK_MSH_MAT_GROUP:
                         this.read_MSH_MAT_GROUP( mesh );
                     break;
-                case CHUNK_SMOOTH_GROUP:
+                case Scene3ds.CHUNK_SMOOTH_GROUP:
                         this.read_SMOOTH_GROUP( mesh, head.length - 6 );
                     break;
                 default:
@@ -1002,7 +1072,7 @@ export class Scene3ds
             let head: Head = this.read_HEAD();
             switch( head.id )
             {
-                case CHUNK_KFSEG:
+                case Scene3ds.CHUNK_KFSEG:
                         this._startFrame = this._fileData.readInt32();
                         this._endFrame = this._fileData.readInt32();
                         if (this._decode)
@@ -1013,13 +1083,13 @@ export class Scene3ds
                             this._decode.exit();
                         }
                     break;
-                case CHUNK_OBJECT_NODE_TAG:
+                case Scene3ds.CHUNK_OBJECT_NODE_TAG:
                         this.read_OBJECT_NODE_TAG( head.length - 6 );
                     break;
-                case CHUNK_TARGET_NODE_TAG:
+                case Scene3ds.CHUNK_TARGET_NODE_TAG:
                         this.read_TARGET_NODE_TAG(head.length - 6);
                     break;
-                case CHUNK_CAMERA_NODE_TAG:
+                case Scene3ds.CHUNK_CAMERA_NODE_TAG:
                         this.read_CAMERA_NODE_TAG(head.length - 6);
                     break;
                 default:
@@ -1053,10 +1123,10 @@ export class Scene3ds
             let head: Head = this.read_HEAD();
             switch( head.id )
             {
-                case CHUNK_NODE_ID:
+                case Scene3ds.CHUNK_NODE_ID:
                         nodeId = this.read_NODE_ID();
                     break;
-                case CHUNK_NODE_HDR:
+                case Scene3ds.CHUNK_NODE_HDR:
                         name = this.read_NAME()
                         for ( let i: number = 0; i < this.numMeshes; ++i )
                         {
@@ -1079,7 +1149,7 @@ export class Scene3ds
                         }
                         //FIXME Build hierarchy here...
                     break;
-                case CHUNK_PIVOT:
+                case Scene3ds.CHUNK_PIVOT:
                         mes.pivot.x = this._fileData.readFloat32()
                         mes.pivot.y = this._fileData.readFloat32()
                         mes.pivot.z = this._fileData.readFloat32()
@@ -1090,19 +1160,19 @@ export class Scene3ds
                             this._decode.exit();
                         }
                     break;
-                case CHUNK_POS_TRACK_TAG:
+                case Scene3ds.CHUNK_POS_TRACK_TAG:
                         this.read_POS_TRACK_TAG( mes.positionTrack );
                     break;
-                case CHUNK_ROT_TRACK_TAG:
+                case Scene3ds.CHUNK_ROT_TRACK_TAG:
                         this.read_ROT_TRACK_TAG( mes.rotationTrack );
                     break;
-                case CHUNK_SCL_TRACK_TAG:
+                case Scene3ds.CHUNK_SCL_TRACK_TAG:
                         this.read_POS_TRACK_TAG( mes.scaleTrack );
                     break;
-                case CHUNK_MORPH_TRACK_TAG:
+                case Scene3ds.CHUNK_MORPH_TRACK_TAG:
                         this.read_MORPH_TRACK_TAG( mes.morphTrack );
                     break;
-                case CHUNK_HIDE_TRACK_TAG:
+                case Scene3ds.CHUNK_HIDE_TRACK_TAG:
                         this.read_HIDE_TRACK_TAG( mes.hideTrack );
                     break;
                 default:
@@ -1136,10 +1206,10 @@ export class Scene3ds
             let head: Head = this.read_HEAD();
             switch( head.id )
             {
-                case CHUNK_NODE_ID:
+                case Scene3ds.CHUNK_NODE_ID:
                         targetNodeId = this.read_NODE_ID();
                     break;
-                case CHUNK_NODE_HDR:
+                case Scene3ds.CHUNK_NODE_HDR:
                         name = this.read_NAME();
                         for ( let i: number = 0; i < this.numCameras; ++i )
                         {
@@ -1162,7 +1232,7 @@ export class Scene3ds
                         }
                         // FIXME  Build hierarchy here...
                     break;
-                case CHUNK_POS_TRACK_TAG:
+                case Scene3ds.CHUNK_POS_TRACK_TAG:
                         this.read_POS_TRACK_TAG( cam.targetTrack );
                     break;
                 default:
@@ -1191,10 +1261,10 @@ export class Scene3ds
             let head: Head = this.read_HEAD();
             switch( head.id )
             {
-                case CHUNK_NODE_ID:
+                case Scene3ds.CHUNK_NODE_ID:
                         positionNodeId = this.read_NODE_ID();
                     break;
-                case CHUNK_NODE_HDR:
+                case Scene3ds.CHUNK_NODE_HDR:
                         name = this.read_NAME();
                         for ( let i: number = 0; i < this.numCameras; ++i )
                         {
@@ -1217,13 +1287,13 @@ export class Scene3ds
                         }
                     // FIXME Build hierarchy here...
                     break;
-                case CHUNK_POS_TRACK_TAG:
+                case Scene3ds.CHUNK_POS_TRACK_TAG:
                         this.read_POS_TRACK_TAG( cam.positionTrack );
                     break;
-                case CHUNK_FOV_TRACK_TAG:
+                case Scene3ds.CHUNK_FOV_TRACK_TAG:
                         this.readPTrack( cam.fovTrack );
                     break;
-                case CHUNK_ROLL_TRACK_TAG:
+                case Scene3ds.CHUNK_ROLL_TRACK_TAG:
                         this.readPTrack( cam.rollTrack );
                     break;
                 default:
@@ -1485,6 +1555,35 @@ export class Scene3ds
                 }
             }
             
+            track.keys[ i ] = key;
+        }
+        
+        if ( this._decode )
+        {
+            this._decode.exit();
+        }
+    }
+
+    private read_HIDE_TRACK_TAG( track: HideKeyTrack3ds ): void
+    {
+        if ( this._decode )
+        {
+            this._decode.enter();
+        }
+        
+        var dummy: SplineKey3ds = new SplineKey3ds();
+        var keys: number = this.readTrackHead( track );
+        track.keys = []
+        
+        for ( var i: number = 0; i < keys; ++i )
+        {
+            var key: HideKey3ds = new HideKey3ds();
+            key.frame = this._fileData.readInt32();
+            if ( this._decode )
+            {
+                this._decode.println( "  Frame: " + key.frame );
+            }
+            this.readSplineParams( dummy );
             track.keys[ i ] = key;
         }
         
