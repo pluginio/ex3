@@ -26,39 +26,134 @@ import { PVWMatrixConstant } from './shaders/floats/PVWMatrixConstant';
 import { Culler } from './display/Culler';
 import { Node } from './display/Node';
 import { ParserAdapter3ds } from 'parsers/max3ds/ParserAdapter3ds';
-import { ByteArray } from 'core/ByteArray';
+import { ByteArray } from './core/ByteArray';
+
 
 console.log('Hello EX3')
 let fileSelect: HTMLInputElement = document.getElementById('file-select') as HTMLInputElement
 
-fileSelect.addEventListener('change', async (e) => {
-    let files = (e.target as HTMLInputElement).files
-    console.log("Files", files)
+//fileSelect.addEventListener('change', async (e) => {
+    //let files = (e.target as HTMLInputElement).files
+    //console.log("Files", files)
 
-    let file = files[0]
+    //let file = files[0]
 
-    try{
-        let buffer = await file.arrayBuffer()
-        console.log("Length: ", buffer.byteLength)
+    //try{
+        //let buffer = await file.arrayBuffer()
+        //console.log("Length: ", buffer.byteLength)
 
-        let data: ByteArray = ByteArray.fromArrayBuffer(buffer)
-        console.log(data.length)
+        //let data: ByteArray = ByteArray.fromArrayBuffer(buffer)
+        //console.log(data.length)
         
-        let adapter3ds: ParserAdapter3ds = new ParserAdapter3ds(data, false, false, false, false)
-        adapter3ds.parse()
+        //let adapter3ds: ParserAdapter3ds = new ParserAdapter3ds(data, false, false, false, false)
+        //adapter3ds.parse()
 
-        console.log("Mesh length: ", adapter3ds.meshes.length)
-        console.log("vBuffer: ", adapter3ds.getMeshtAt(0).vertexBuffer.numElements)
-        console.log("iBuffer: ", adapter3ds.getMeshtAt(0).indexBuffer.numElements)
-    }
-    catch(e)
-    {
-        console.log("Something went wrong", e.message)
-    }
-}, false)
+        // let vFormat: VertexFormat = VertexFormat.create(3,
+        //     AttributeUsage.POSITION, AttributeType.FLOAT3, 0)
+        
+        // console.log(`Stride: ${vFormat.stride}`)
+        
+        // let vBuffer: VertexBuffer = new VertexBuffer(4, vFormat.stride, BufferUsage.STATIC)
+        // let iBuffer: IndexBuffer = new IndexBuffer(6, 2, BufferUsage.STATIC)
+        
+        // let vba: VertexBufferAccessor = new VertexBufferAccessor(vFormat, vBuffer)
+        // vba.setPositionAt(0, [-1, -1, 0])
+        // vba.setPositionAt(1, [ 1, -1, 0])
+        // vba.setPositionAt(2, [ 1,  1, 0])
+        // vba.setPositionAt(3, [-1,  1, 0])
+
+        // iBuffer.data.position = 0
+        // iBuffer.data.writeInt16(0)
+        // iBuffer.data.writeInt16(1)
+        // iBuffer.data.writeInt16(3)
+        // iBuffer.data.writeInt16(1)
+        // iBuffer.data.writeInt16(2)
+        // iBuffer.data.writeInt16(3)
+
+        // let mesh : TriMesh = new TriMesh(vFormat, vBuffer, iBuffer)
 
 
-/*
+    
+        // let camera: Camera = new Camera()
+        // camera.setFrustumFov(60, 800/600, .01, 1000)
+        // let camPosition: Point = Point.new(0, 0, -100)
+        // let camDVector: Vector = Vector.UNIT_Z
+        // let camUVector: Vector = Vector.UNIT_Y
+        // let camRVector: Vector = camDVector.cross(camUVector)
+        // camera.setFrame(camPosition, camDVector, camUVector, camRVector)
+
+        // let scene: Node = new Node()
+        // let cameraNode: CameraNode = new CameraNode(camera)
+        // //let mesh: TriMesh = adapter3ds.getMeshtAt(0)
+        // mesh.effectInstance = new DefaultEffect().createInstance()
+
+        // console.log("vFormat numAttributes: ", mesh.vertexFormat.numAttributes)
+        // for(let i: number = 0; i < mesh.vertexFormat.numAttributes; ++i)
+        // {
+        //     let attribute = mesh.vertexFormat.attributeAt(i)
+        //     console.log("Attribute type: ", attribute.type)
+        // }
+
+        // console.log("vBuffer elements: ",mesh.vertexBuffer.numElements)
+        // console.log("iBuffer elements: ", mesh.indexBuffer.numElements)
+
+        // scene.attachChild(cameraNode)
+        // scene.attachChild(mesh)
+        
+        // scene.update(0, true)
+
+        // renderer.camera = camera
+        
+        
+        
+        // renderer.clearColor = [1, 0.2, .5, 1]
+        
+        
+        // renderer.draw(mesh, mesh.effectInstance)
+        // renderer.clearBuffers()
+
+        // renderer.displayColorBuffer()        
+
+        /*
+        let culler = new Culler(camera)
+        culler.computeVisibleSet(scene)
+
+        renderer.clearColor = [1, .3, .6, 1]
+        renderer.clearBuffers()
+        renderer.drawVisibleSet(culler.visibleSet)
+        renderer.postDraw()         
+        // renderer.displayColorBuffer() // override
+
+        console.log("Cull count: ", culler.visibleSet)
+        //renderer.draw(mesh, new DefaultEffect().createInstance())
+
+        console.log("Scene: ", scene)
+        console.log("Camera: ", camera)
+        console.log("Mesh: ", mesh)
+        console.log("Culler: ", culler)
+
+        console.log("Mesh modelBound", mesh.modelBound)
+        console.log("Mesh worldBound", mesh.worldBound)
+        */
+   // }
+   // catch(e)
+   // {
+        //console.log("Something went wrong: ", e.message)
+   // }
+//}, false)
+
+
+
+
+
+
+
+
+
+
+
+/* THIS IS CURRENT
+
 // TODO: setup testing
 let input: RendererInput = new RendererInput()
 input.mContext = GL20.createContext('ex3-root')
@@ -67,17 +162,137 @@ let renderer:GL20Renderer = new GL20Renderer(input, 800, 600,
     TextureFormat.R8G8B8, TextureFormat.D24S8, 4)
 renderer.setDepthRange(0.01, 1)
 
-renderer.clearColor = [0, 0.3, 0.5, 1]
+
+renderer.clearColor = [1, 1, 1, 1]
 renderer.clearBuffers()
 
+let vShader: WebGLShader = GL20.gl.createShader(GL20.gl.VERTEX_SHADER)
+GL20.gl.shaderSource(vShader, 
+`attribute vec4 a_position;
+uniform mat4 u_pvwMatrix;
+void main() {
+    gl_Position = a_position * u_pvwMatrix;
+}`)
+GL20.gl.compileShader(vShader)
+
+let fShader: WebGLShader = GL20.gl.createShader(GL20.gl.FRAGMENT_SHADER)
+GL20.gl.shaderSource(fShader, 
+`void main() {
+    gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
+}`)
+GL20.gl.compileShader(fShader)
+
+let program: WebGLProgram = GL20.gl.createProgram()
+GL20.gl.attachShader(program, vShader)
+GL20.gl.attachShader(program, fShader)
+GL20.gl.linkProgram(program)
+
+if ( !GL20.gl.getProgramParameter( program, GL20.gl.LINK_STATUS) ) {
+    let info = GL20.gl.getProgramInfoLog(program);
+    throw 'Could not compile WebGL program. \n' + info;
+}
+GL20.gl.useProgram(program)
+
+
+
+
+let vFormat: VertexFormat = VertexFormat.create(1,
+    AttributeUsage.POSITION, AttributeType.FLOAT3, 0)
+
+console.log(`Stride: ${vFormat.stride}`)
+
+let vBuffer: VertexBuffer = new VertexBuffer(4, vFormat.stride, BufferUsage.STATIC)
+let iBuffer: IndexBuffer = new IndexBuffer(6, 2, BufferUsage.STATIC)
+
+let vba: VertexBufferAccessor = new VertexBufferAccessor(vFormat, vBuffer)
+vba.setPositionAt(0, [-1, -1, 10])
+vba.setPositionAt(1, [ 1, -1, 10])
+vba.setPositionAt(2, [ 1,  1, 10])
+vba.setPositionAt(3, [-1,  1, 10])
+
+iBuffer.data.position = 0
+iBuffer.data.writeInt16(0)
+iBuffer.data.writeInt16(1)
+iBuffer.data.writeInt16(3)
+iBuffer.data.writeInt16(1)
+iBuffer.data.writeInt16(2)
+iBuffer.data.writeInt16(3)
+
+let mesh : TriMesh = new TriMesh(vFormat, vBuffer, iBuffer)
+mesh.effectInstance = new DefaultEffect().createInstance()
+
+let camera: Camera = new Camera()
+camera.setFrustumFov(90, 800/600, 0, 1000)
+let camPosition: Point = Point.new(0, 0, -10)
+let camDVector: Vector = Vector.UNIT_Z
+let camUVector: Vector = Vector.UNIT_Y_NEG
+let camRVector: Vector = camDVector.cross(camUVector)
+camera.setFrame(camPosition, camDVector, camUVector, camRVector)
+renderer.camera = camera
+
+let scene: Node = new Node()
+let cameraNode: CameraNode = new CameraNode(camera)
+//let mesh: TriMesh = adapter3ds.getMeshtAt(0)
+
+console.log("vFormat numAttributes: ", mesh.vertexFormat.numAttributes)
+for(let i: number = 0; i < mesh.vertexFormat.numAttributes; ++i)
+{
+    let attribute = mesh.vertexFormat.attributeAt(i)
+    console.log("Attribute type: ", attribute.type)
+}
+
+console.log("vBuffer elements: ",mesh.vertexBuffer.numElements)
+console.log("iBuffer elements: ", mesh.indexBuffer.numElements)
+
+scene.attachChild(cameraNode)
+scene.attachChild(mesh)
+
+scene.update(0, true)
+renderer.draw(mesh, mesh.effectInstance)
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+//renderer.clearColor = [1, 0.2, .5, 1]
+
+//GL20.gl.drawBuffers([GL20.gl.NONE, GL20.gl.COLOR_ATTACHMENT1])
+
+//renderer.draw(mesh, mesh.effectInstance)
+//renderer.clearBuffers()
+
+//renderer.displayColorBuffer()  
+
+
+
+
+
+
+
+
+/*
 renderer.clearColor = [0.3, 1, 0.2, 1]
 renderer.clearColorBufferRect(50, 100, 200, 120)
+*/
 
-renderer.resize(700, 400)
-renderer.reverseCullOrder = true
+//renderer.resize(700, 400)
+//renderer.reverseCullOrder = true
 
-renderer.camera = new Camera(true)
 
+
+
+/*
 let vFormat: VertexFormat = VertexFormat.create(3,
     AttributeUsage.POSITION, AttributeType.FLOAT3, 0,
     AttributeUsage.NORMAL, AttributeType.FLOAT3, 0,
@@ -131,13 +346,18 @@ console.log(`TCoord 0: ${vba.getTCoordAt(1, 0)}`)
 console.log(`TCoord 1: ${vba.getTCoordAt(1, 1)}`)
 console.log(`TCoord 2: ${vba.getTCoordAt(1, 2)}`)
 console.log(`TCoord 3: ${vba.getTCoordAt(1, 3)}`)
+*/
 
 
+
+/*
 let mesh: TriMesh = new TriMesh(vFormat, vBuffer, iBuffer)
 console.log("numTriangles: " + mesh.numTriangles)
 let effectInstance: VisualEffectInstance = new DefaultEffect().createInstance()
 renderer.draw(mesh, effectInstance)
+*/
 
+/*
 let example: CameraAndLightNodes = new CameraAndLightNodes()
 example.onInitialize()
 */
