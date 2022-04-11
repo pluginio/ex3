@@ -26,6 +26,20 @@ export class Vector implements Disposable {
         return Vector.new(0, 0, 1)
     }
 
+    public static get UNIT_X_INV(): Vector {
+        return Vector.new(-1, 0, 0)
+    }
+
+    public static get UNIT_Y_INV(): Vector {
+        return Vector.new(0, -1, 0)
+    }
+
+    public static get UNIT_Z_INV(): Vector {
+        return Vector.new(0, 0, -1)
+    }
+
+
+
     private _tuple: number[]
 
     public constructor(x: number = 0, y: number = 0, z: number = 0) {
@@ -38,6 +52,11 @@ export class Vector implements Disposable {
 
     public static new(x: number = 0, y: number = 0, z: number = 0): Vector {
         return Vector._pool.get().set(x, y, z, 0)
+    }
+
+    public static fromTuple(data: number[])
+    {
+        return Vector._pool.get().set(data[0], data[1], data[2], data[3])
     }
 
     public get x(): number {

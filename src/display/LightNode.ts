@@ -2,6 +2,7 @@ import { Node } from './Node'
 import { Light } from './Light'
 import { Matrix } from '../geom/Matrix'
 import { Point } from '../geom/Point';
+import { Vector } from 'geom/Vector';
 
 export class LightNode extends Node
 {
@@ -56,10 +57,14 @@ export class LightNode extends Node
 
         if(this._light)
         {
+            let columnD = this.worldTransform.getRotate().getColumn(0)
+            let columnU = this.worldTransform.getRotate().getColumn(1)
+            let columnR = this.worldTransform.getRotate().getColumn(2)
+
             this._light.position = this.worldTransform.getTranslate()
-            this.worldTransform.getRotate().getColumn(0, this._light.dVector)
-            this.worldTransform.getRotate().getColumn(1, this._light.uVector)
-            this.worldTransform.getRotate().getColumn(2, this._light.rVector)
+            this._light.dVector.set(columnD[0], columnD[1], columnD[2], columnD[3])
+            this._light.uVector.set(columnU[0], columnU[1], columnU[2], columnU[3])
+            this._light.rVector.set(columnR[0], columnR[1], columnR[2], columnR[3])
         }
     }
 }

@@ -8,8 +8,16 @@ export class GL20
         this.gl = canvas.getContext("webgl2") as WebGL2RenderingContext
         if(!this.gl)
         {
-            console.warn("Unable to create WebGL context");
+            console.warn("Unable to create WebGL 2.0 context");
         }
+
+        /*
+        var ext = this.gl.getExtension("OES_vertex_array_object");
+        if (!ext) {
+            console.warn("Required extension OES_vertex_array_object is unsupported");
+        }
+        */
+       
         return this.gl
     }
 }

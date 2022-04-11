@@ -152,7 +152,7 @@ let fileSelect: HTMLInputElement = document.getElementById('file-select') as HTM
 
 
 
-/* THIS IS CURRENT
+/* THIS IS CURRENT */
 
 // TODO: setup testing
 let input: RendererInput = new RendererInput()
@@ -163,26 +163,37 @@ let renderer:GL20Renderer = new GL20Renderer(input, 800, 600,
 renderer.setDepthRange(0.01, 1)
 
 
-renderer.clearColor = [1, 1, 1, 1]
+renderer.clearColor = [0.5, 0.6, 1]
 renderer.clearBuffers()
 
-let vShader: WebGLShader = GL20.gl.createShader(GL20.gl.VERTEX_SHADER)
+let vShader = GL20.gl.createShader(GL20.gl.VERTEX_SHADER)
 GL20.gl.shaderSource(vShader, 
-`attribute vec4 a_position;
+`#version 300 es
+
+in vec4 a_position;
+out vec4 outPosition;
 uniform mat4 u_pvwMatrix;
+
 void main() {
-    gl_Position = a_position * u_pvwMatrix;
-}`)
+    outPosition = a_position * u_pvwMatrix;
+}`
+)
 GL20.gl.compileShader(vShader)
 
-let fShader: WebGLShader = GL20.gl.createShader(GL20.gl.FRAGMENT_SHADER)
+let fShader = GL20.gl.createShader(GL20.gl.FRAGMENT_SHADER)
 GL20.gl.shaderSource(fShader, 
-`void main() {
-    gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
-}`)
+`#version 300 es
+
+precision highp float;
+out vec4 outColor;
+
+void main() {
+    outColor = vec4(0.0, 1.0, 0.0, 1.0);
+}`
+)
 GL20.gl.compileShader(fShader)
 
-let program: WebGLProgram = GL20.gl.createProgram()
+let program = GL20.gl.createProgram()
 GL20.gl.attachShader(program, vShader)
 GL20.gl.attachShader(program, fShader)
 GL20.gl.linkProgram(program)
@@ -193,18 +204,14 @@ if ( !GL20.gl.getProgramParameter( program, GL20.gl.LINK_STATUS) ) {
 }
 GL20.gl.useProgram(program)
 
-
-
-
-let vFormat: VertexFormat = VertexFormat.create(1,
-    AttributeUsage.POSITION, AttributeType.FLOAT3, 0)
+let vFormat = VertexFormat.create(1, AttributeUsage.POSITION, AttributeType.FLOAT3, 0)
 
 console.log(`Stride: ${vFormat.stride}`)
 
-let vBuffer: VertexBuffer = new VertexBuffer(4, vFormat.stride, BufferUsage.STATIC)
-let iBuffer: IndexBuffer = new IndexBuffer(6, 2, BufferUsage.STATIC)
+let vBuffer = new VertexBuffer(4, vFormat.stride, BufferUsage.STATIC)
+let iBuffer = new IndexBuffer(6, 2, BufferUsage.STATIC)
 
-let vba: VertexBufferAccessor = new VertexBufferAccessor(vFormat, vBuffer)
+let vba = new VertexBufferAccessor(vFormat, vBuffer)
 vba.setPositionAt(0, [-1, -1, 10])
 vba.setPositionAt(1, [ 1, -1, 10])
 vba.setPositionAt(2, [ 1,  1, 10])
@@ -218,24 +225,28 @@ iBuffer.data.writeInt16(1)
 iBuffer.data.writeInt16(2)
 iBuffer.data.writeInt16(3)
 
-let mesh : TriMesh = new TriMesh(vFormat, vBuffer, iBuffer)
+let mesh = new TriMesh(vFormat, vBuffer, iBuffer)
 mesh.effectInstance = new DefaultEffect().createInstance()
 
-let camera: Camera = new Camera()
+let camera = new Camera()
 camera.setFrustumFov(90, 800/600, 0, 1000)
-let camPosition: Point = Point.new(0, 0, -10)
-let camDVector: Vector = Vector.UNIT_Z
-let camUVector: Vector = Vector.UNIT_Y_NEG
-let camRVector: Vector = camDVector.cross(camUVector)
+let camPosition = Point.new(-10, 0, 0)
+let camDVector = Vector.UNIT_Z
+let camUVector = Vector.UNIT_Y_INV
+let camRVector = camDVector.cross(camUVector)
 camera.setFrame(camPosition, camDVector, camUVector, camRVector)
 renderer.camera = camera
 
-let scene: Node = new Node()
-let cameraNode: CameraNode = new CameraNode(camera)
+let scene = new Node()
+let cameraNode = new CameraNode(camera)
 //let mesh: TriMesh = adapter3ds.getMeshtAt(0)
 
+
+console.log("Camera position: ", camera.position)
+console.log("Camera frustum: ", camera.frustum)
+
 console.log("vFormat numAttributes: ", mesh.vertexFormat.numAttributes)
-for(let i: number = 0; i < mesh.vertexFormat.numAttributes; ++i)
+for(let i = 0; i < mesh.vertexFormat.numAttributes; ++i)
 {
     let attribute = mesh.vertexFormat.attributeAt(i)
     console.log("Attribute type: ", attribute.type)
@@ -249,12 +260,7 @@ scene.attachChild(mesh)
 
 scene.update(0, true)
 renderer.draw(mesh, mesh.effectInstance)
-
-
-
-*/
-
-
+// renderer.displayColorBuffer()
 
 
 

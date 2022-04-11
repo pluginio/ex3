@@ -238,10 +238,10 @@ describe('Matrix setRow', (): void => {
     it('should set a Matrix row', (): void => {
 
         let matrix = Matrix.ZERO
-        matrix.setRow(0, Point.new(0, 1, 2, 3))
-        matrix.setRow(1, Point.new(4, 5, 6, 7))
-        matrix.setRow(2, Point.new(8, 9, 10, 11))
-        matrix.setRow(3, Point.new(12, 13, 14, 15))
+        matrix.setRow(0, [0, 1, 2, 3])
+        matrix.setRow(1, [4, 5, 6, 7])
+        matrix.setRow(2, [8, 9, 10, 11])
+        matrix.setRow(3, [12, 13, 14, 15])
     
         expect(matrix.toArray()).toEqual([
             0, 1, 2, 3,
@@ -249,6 +249,48 @@ describe('Matrix setRow', (): void => {
             8, 9, 10, 11,
             12, 13, 14, 15
         ])
+    })
+})
+
+describe('Matrix getRow', (): void => {
+    it('should get a Matrix row', (): void => {
+
+        let matrix = Matrix.TEST
+    
+        expect(matrix.getRow(0)).toEqual([0, 1, 2, 3])
+        expect(matrix.getRow(1)).toEqual([4, 5, 6, 7])
+        expect(matrix.getRow(2)).toEqual([8, 9, 10, 11])
+        expect(matrix.getRow(3)).toEqual([12, 13, 14, 15])
+    })
+})
+
+describe('Matrix setColumn', (): void => {
+    it('should set a Matrix column', (): void => {
+
+        let matrix = Matrix.ZERO
+        matrix.setColumn(0, [0, 1, 2, 3])
+        matrix.setColumn(1, [4, 5, 6, 7])
+        matrix.setColumn(2, [8, 9, 10, 11])
+        matrix.setColumn(3, [12, 13, 14, 15])
+    
+        expect(matrix.toArray()).toEqual([
+            0, 4, 8, 12,
+            1, 5, 9, 13,
+            2, 6, 10, 14,
+            3, 7, 11, 15
+        ])
+    })
+})
+
+describe('Matrix getColumn', (): void => {
+    it('should get a Matrix column', (): void => {
+
+        let matrix = Matrix.TEST
+    
+        expect(matrix.getColumn(0)).toEqual([0, 4, 8, 12])
+        expect(matrix.getColumn(1)).toEqual([1, 5, 9, 13])
+        expect(matrix.getColumn(2)).toEqual([2, 6, 10, 14])
+        expect(matrix.getColumn(3)).toEqual([3, 7, 11, 15])
     })
 })
 

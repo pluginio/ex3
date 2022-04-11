@@ -18,10 +18,14 @@ export class DefaultEffect extends VisualEffect
 {
     private static msVPrograms:string[] = [
         "",
-        `
+        `#version 300 es
+        precision highp float;
+
+        out vec4 outPosition;
         attribute vec4 a_position;
+
         void main() {
-          gl_Position = a_position;
+          outPosition = a_position;
         }`,
         "",
         "",
@@ -30,7 +34,12 @@ export class DefaultEffect extends VisualEffect
 
     private static msPPrograms:string[] = [
         "",
-        `gl_FragColor = vec4(1, 0, 0.5, 1);`,
+        `#version 300 es
+
+        precision highp float;
+        out vec4 outColor;
+        
+        outColor = vec4(1, 0, 0.5, 1);`,
         "",
         "",
         ""

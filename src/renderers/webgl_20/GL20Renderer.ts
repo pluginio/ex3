@@ -68,6 +68,7 @@ export class GL20Renderer extends Renderer
 
         let numPixelsDrawn: number
 
+        console.log("Drawing primitive start")
         if(type == PrimitiveType.TRIMESH
             || type == PrimitiveType.TRISTRIP
             || type == PrimitiveType.TRIFAN)
@@ -79,6 +80,9 @@ export class GL20Renderer extends Renderer
             {
                 let indexType: number
 
+                console.log("Indices numElements: ", ibuffer.numElements)
+                console.log("Indices elementSize: ", ibuffer.elementSize)
+
                 if(ibuffer.elementSize == 2)
                 {
                     indexType = gl.UNSIGNED_SHORT
@@ -87,6 +91,9 @@ export class GL20Renderer extends Renderer
                 {
                     indexType = gl.UNSIGNED_INT
                 }
+
+                console.log("**** Drawing ****")
+                console.log("Type: ", type, GL20Mapping.PrimitiveType[type])
 
                 gl.drawRangeElements(GL20Mapping.PrimitiveType[type], 0, numVertices - 1,
                     numIndices, indexType, ibuffer.offset)
@@ -117,24 +124,27 @@ export class GL20Renderer extends Renderer
         {
             console.assert(false, "Invalid type")
         }
+        console.log("Drawing primitive finish")
     }
 
-    /*
+    
     public displayColorBuffer(): void
     {
+        let gl = GL20.gl
+        /*
+        // TODO: Working here
         let data: RendererData = this._data
-        GL20.gl.clear(WebGL2RenderingContext.COLOR_BUFFER_BIT)
+        gl.clear(gl.COLOR_BUFFER_BIT)
+        */
+        
+        // const colorBuffer = gl.createBuffer()
+        // gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer)
     }
-    */
-
-
-
-
 
     // TODO abstract to base class?
     public set alphaState(alphaState: AlphaState)
     {
-        let gl: WebGL2RenderingContext = GL20.gl
+        let gl = GL20.gl
 
         if(!this._overrideAlphaState)
         {

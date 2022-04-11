@@ -179,48 +179,48 @@ export class Matrix implements Disposable {
         this._tuple[i + Math.floor(column)] = value
     }
 
-    public setRow(row: number, data:Point): void
+    public setRow(row: number, data:number[]): void
     {
         let i: number = Math.floor(row * 4);
 
-        this._tuple[0 + i] = data.x
-        this._tuple[1 + i] = data.y
-        this._tuple[2 + i] = data.z
-        this._tuple[3 + i] = data.w
+        this._tuple[0 + i] = data[0]
+        this._tuple[1 + i] = data[1]
+        this._tuple[2 + i] = data[2]
+        this._tuple[3 + i] = data[3]
     }
 
-    public getRow(row: number, data: Point): void
+    public getRow(row: number): number[]
     {
         let i: number = Math.floor(row * 4)
 
-        data.set(
+        return [
             this._tuple[0 + i],
             this._tuple[1 + i],
             this._tuple[2 + i],
             this._tuple[3 + i]
-        )
+        ]
     }
 
-    public setColumn(column: number, data: Vector): void
+    public setColumn(column: number, data: number[]): void
     {
         let i: number = Math.floor(column)
 
-        this._tuple[i] = data.x
-        this._tuple[i + 4] = data.y
-        this._tuple[i + 8] = data.z
-        this._tuple[i + 12] = data.w
+        this._tuple[i] = data[0]
+        this._tuple[i + 4] = data[1]
+        this._tuple[i + 8] = data[2]
+        this._tuple[i + 12] = data[3]
     }
 
-    public getColumn(column: number, data: Vector): void
+    public getColumn(column: number): number[]
     {
         let i: number = Math.floor(column)
 
-        data.set(
+        return [
             this._tuple[i],
             this._tuple[i + 4],
             this._tuple[i + 8],
             this._tuple[i + 12]
-        )
+        ]
     }
 
     public add(mat: Matrix): Matrix
