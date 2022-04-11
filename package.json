@@ -4,7 +4,7 @@
   "description": "Real-time 3D engine for TypeScript.",
   "main": "ex3.js",
   "scripts": {
-    "debug": "webpack-dev-server --config webpack.dev.js --host 127.0.0.1 --port 3300 --display-modules --content-base dev --inline --hot --mode development --env.ENVIRONMENT=dev",
+    "dev": "webpack serve --config webpack.dev.js --host 127.0.0.1 --port 3300 --content-base dev --inline --hot --mode development",
     "build": "webpack --config webpack.release.js --mode production --progress --colors",
     "desktop": "yarn run build && webpack --config webpack.desktop.js --mode production --progress --colors && electron ./build/desktop/electron.js",
     "test": "karma start"

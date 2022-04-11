@@ -7,6 +7,15 @@ import { Constants } from "../core/Constants";
 export class Matrix implements Disposable {
     private static readonly _pool: Pool<Matrix> = new Pool(10, Matrix)
 
+    public static get TEST(): Matrix {
+        return Matrix.new(
+            0, 1, 2, 3,
+            4, 5, 6, 7,
+            8, 9, 10, 11,
+            12, 13, 14, 15
+        )
+    }
+
     public static get ZERO(): Matrix {
         return Matrix.new(
             0, 0, 0, 0,
@@ -177,7 +186,7 @@ export class Matrix implements Disposable {
         this._tuple[0 + i] = data.x
         this._tuple[1 + i] = data.y
         this._tuple[2 + i] = data.z
-        this._tuple[4 + i] = data.w
+        this._tuple[3 + i] = data.w
     }
 
     public getRow(row: number, data: Point): void
