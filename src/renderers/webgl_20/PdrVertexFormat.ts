@@ -3,6 +3,8 @@ import { Renderer } from "../Renderer";
 import { VertexFormat } from "../../resources/VertexFormat";
 import { AttributeUsage } from "resources/AttributeUsage";
 import { GL20Mapping } from "./GL20Mapping";
+import { GL20 } from "./GL20";
+import { GL20Renderer } from "./GL20Renderer";
 
 export class PdrVertexFormat implements IVertexFormat
 {
@@ -73,7 +75,7 @@ export class PdrVertexFormat implements IVertexFormat
     public constructor(renderer: Renderer, vFormat: VertexFormat)
     {
         console.log("Creating vertex format - WebGL 2.0")
-        // void gl.vertexAttribPointer(index, size, type, normalized, stride, offset);
+
         this._stride = vFormat.stride
 
         let type: number, i: number, unit: number = 0
@@ -203,16 +205,52 @@ export class PdrVertexFormat implements IVertexFormat
 
     public enable(renderer: Renderer): void
     {
-        console.log("Enabling vertex format")
+        const gl = GL20.gl
 
+        console.log("TODO: Complete enabling vertex format")
+
+        console.log("_position type: ", this._positionType)
         if(this._hasPosition)
         {
-            //GL20.gl.vertexAttribPointer(this._positionIndex, )
+            gl.enableVertexAttribArray(0)
+            gl.vertexAttribPointer(
+                this._positionIndex, 
+                this._positionChannels, 
+                this._positionType, 
+                false, 
+                this._stride, 
+                0 + this._positionOffset
+            )
+        }
+
+        if(this._hasNormal)
+        {
+            gl.enableVertexAttribArray(2)
+            GL20.gl.vertexAttribPointer(
+                this._normalIndex, 
+                this._normalChannels, 
+                this._normalType, 
+                false, 
+                this._stride, 
+                0 + this._normalOffset
+            )
         }
     }
 
     public disable(renderer: Renderer): void
     {
         console.log("Disabling vertex format")
+
+        const gl = GL20.gl
+
+        if(this._hasPosition)
+        {
+            gl.disableVertexAttribArray(0)
+        }
+
+        if(this._hasNormal)
+        {
+            gl.disableVertexAttribArray(2)
+        }
     }
 }

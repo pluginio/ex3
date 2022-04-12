@@ -73,30 +73,42 @@ export class GL20Renderer extends Renderer
             || type == PrimitiveType.TRISTRIP
             || type == PrimitiveType.TRIFAN)
         {
-            let numVertices: number = vbuffer.numElements
-            let numIndices: number = ibuffer.numElements
+            let numVertices = vbuffer.numElements
+            let numIndices = ibuffer.numElements
 
             if(numVertices > 0 && numIndices > 0)
             {
                 let indexType: number
+                const size = ibuffer.elementSize
 
                 console.log("Indices numElements: ", ibuffer.numElements)
-                console.log("Indices elementSize: ", ibuffer.elementSize)
+                console.log("Indices elementSize: ", size)
+                console.log("numVertices: ", numVertices)
 
-                if(ibuffer.elementSize == 2)
+                if(size == 2)
                 {
                     indexType = gl.UNSIGNED_SHORT
                 }
-                else
+                else if(size == 2)
                 {
                     indexType = gl.UNSIGNED_INT
                 }
+                else
+                {
+                    throw new Error(`Unknown element size: ${size}`)
+                }
 
                 console.log("**** Drawing ****")
-                console.log("Type: ", type, GL20Mapping.PrimitiveType[type])
+                console.log("Type: ", GL20Mapping.PrimitiveType[type])
 
+
+                // TODO: use drawRangeElements
+                gl.drawArrays(GL20Mapping.PrimitiveType[type], 0, numVertices)
+
+                /*
                 gl.drawRangeElements(GL20Mapping.PrimitiveType[type], 0, numVertices - 1,
                     numIndices, indexType, ibuffer.offset)
+                    */
             }
         }
         else if(type == PrimitiveType.POLYSEGMENTS_CONTIGUOUS)
@@ -450,7 +462,7 @@ export class GL20Renderer extends Renderer
     // TODO move to shader
     public set wireState(wireState: WireState)
     {
-        console.warn("Not implemented")
+        console.warn("WireState not implemented")
         /*
         let gl: WebGL2RenderingContext = GL20.gl
 
@@ -637,23 +649,36 @@ export class GL20Renderer extends Renderer
         {
             let numVertices: number = vbuffer.numElements
             let numIndices: number = ibuffer.numElements
+
+            console.log("numVertices: ", numVertices)
+            console.log("numIndices: ", numIndices)
             if(numVertices > 0 && numIndices > 0)
             {
                 let indexType: number;
                 let offset = ibuffer.offset
-                // TODO
+                let size = ibuffer.elementSize
 
-                if(ibuffer.elementSize == 2)
+                if(size == 2)
                 {
                     indexType = gl.UNSIGNED_SHORT
                 }
-                else // size is 4
+                else if(size == 4)
                 {
                     indexType = gl.UNSIGNED_INT
                 }
+                else
+                {
+                    throw new Error(`Unknown element size: ${size}`)
+                }
 
+                console.log("Drawing a TriMesh")
+
+                gl.drawArrays(GL20Mapping.PrimitiveType[type], offset, numVertices)
+
+                /*
                 gl.drawRangeElements(GL20Mapping.PrimitiveType[type], 0, numVertices-1,
                     numIndices, indexType, offset)
+                    */
             }
         }
         else if(type == PrimitiveType.POLYSEGMENTS_CONTIGUOUS)

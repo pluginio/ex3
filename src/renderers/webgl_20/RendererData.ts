@@ -94,7 +94,7 @@ export class RendererState
         this.mDepthCompareFunction = GL20Mapping.DepthCompare[dstate.compare]
 
         this.mDepthEnabled ? gl.enable(gl.DEPTH_TEST) : gl.disable(gl.DEPTH_TEST)
-        gl.depthMask(this.mDepthEnabled ? true : false)
+        gl.depthMask(this.mDepthEnabled)
         gl.depthFunc(this.mDepthCompareFunction)
 
         // offset state
@@ -147,13 +147,15 @@ export class SamplerState
 
     public getCurrent(target: number): void
     {
-        // this.mAnisotropy = GL20.gl.getTexParameter(target, WebGL2RenderingContext.ANISOTROPY)
-        // this.mLodBias = GL20.gl.getTexParameter(target, WebGL2RenderingContext.TEXTURE_LOD_BIAS)
-        this.mMagFilter = GL20.gl.getTexParameter(target, WebGL2RenderingContext.TEXTURE_MAG_FILTER)
-        this.mMinFilter = GL20.gl.getTexParameter(target, WebGL2RenderingContext.TEXTURE_MIN_FILTER)
-        //this.mBorderColor = GL20.gl.getTexParameter(target, WebGL2RenderingContext.BORDER_COLOR)
-        this.mWrap[0] = GL20.gl.getTexParameter(target, WebGL2RenderingContext.TEXTURE_WRAP_S)
-        this.mWrap[1] = GL20.gl.getTexParameter(target, WebGL2RenderingContext.TEXTURE_WRAP_T)
-        this.mWrap[2] = GL20.gl.getTexParameter(target, WebGL2RenderingContext.TEXTURE_WRAP_S)
+        const gl = GL20.gl
+
+        // this.mAnisotropy = getTexParameter(target, WebGL2RenderingContext.ANISOTROPY)
+        // this.mLodBias = gl.getTexParameter(target, WebGL2RenderingContext.MAX_TEXTURE_LOD_BIAS)
+        this.mMagFilter = gl.getTexParameter(target, WebGL2RenderingContext.TEXTURE_MAG_FILTER)
+        this.mMinFilter = gl.getTexParameter(target, WebGL2RenderingContext.TEXTURE_MIN_FILTER)
+        // this.mBorderColor = gl.getTexParameter(target, WebGL2RenderingContext.BORDER_COLOR)
+        this.mWrap[0] = gl.getTexParameter(target, WebGL2RenderingContext.TEXTURE_WRAP_S)
+        this.mWrap[1] = gl.getTexParameter(target, WebGL2RenderingContext.TEXTURE_WRAP_T)
+        this.mWrap[2] = gl.getTexParameter(target, WebGL2RenderingContext.TEXTURE_WRAP_S)
     }
 }

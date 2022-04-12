@@ -27,6 +27,7 @@ import { Culler } from './display/Culler';
 import { Node } from './display/Node';
 import { ParserAdapter3ds } from 'parsers/max3ds/ParserAdapter3ds';
 import { ByteArray } from './core/ByteArray';
+import { Transform } from 'geom/Transform';
 
 
 console.log('Hello EX3')
@@ -155,8 +156,9 @@ let fileSelect: HTMLInputElement = document.getElementById('file-select') as HTM
 /* THIS IS CURRENT */
 
 // TODO: setup testing
-let input: RendererInput = new RendererInput()
+const input = new RendererInput()
 input.mContext = GL20.createContext('ex3-root')
+const gl = GL20.gl
 
 let renderer:GL20Renderer = new GL20Renderer(input, 800, 600,
     TextureFormat.R8G8B8, TextureFormat.D24S8, 4)
@@ -167,42 +169,45 @@ renderer.clearColor = [0.5, 0.6, 1]
 renderer.clearBuffers()
 
 let vShader = GL20.gl.createShader(GL20.gl.VERTEX_SHADER)
-GL20.gl.shaderSource(vShader, 
+gl.shaderSource(vShader, 
 `#version 300 es
 
-in vec4 a_position;
+layout(location = 0) in vec4 a_position;
 out vec4 outPosition;
 uniform mat4 u_pvwMatrix;
 
 void main() {
-    outPosition = a_position * u_pvwMatrix;
+    outPosition = a_position;
 }`
 )
-GL20.gl.compileShader(vShader)
+gl.compileShader(vShader)
 
-let fShader = GL20.gl.createShader(GL20.gl.FRAGMENT_SHADER)
-GL20.gl.shaderSource(fShader, 
+let fShader = gl.createShader(gl.FRAGMENT_SHADER)
+gl.shaderSource(fShader, 
 `#version 300 es
 
 precision highp float;
 out vec4 outColor;
 
 void main() {
-    outColor = vec4(0.0, 1.0, 0.0, 1.0);
+    outColor = vec4(0.0, 1.0, 0.5, 1.0);
 }`
 )
-GL20.gl.compileShader(fShader)
+gl.compileShader(fShader)
 
-let program = GL20.gl.createProgram()
-GL20.gl.attachShader(program, vShader)
-GL20.gl.attachShader(program, fShader)
-GL20.gl.linkProgram(program)
+let program = gl.createProgram()
+gl.attachShader(program, vShader)
+gl.attachShader(program, fShader)
+gl.linkProgram(program)
 
-if ( !GL20.gl.getProgramParameter( program, GL20.gl.LINK_STATUS) ) {
-    let info = GL20.gl.getProgramInfoLog(program);
+// es300 lets us do this in the shader with layout
+// gl.bindAttribLocation(program, 0, "a_position")
+
+if ( !gl.getProgramParameter( program, gl.LINK_STATUS) ) {
+    let info = gl.getProgramInfoLog(program);
     throw 'Could not compile WebGL program. \n' + info;
 }
-GL20.gl.useProgram(program)
+gl.useProgram(program)
 
 let vFormat = VertexFormat.create(1, AttributeUsage.POSITION, AttributeType.FLOAT3, 0)
 
@@ -229,8 +234,8 @@ let mesh = new TriMesh(vFormat, vBuffer, iBuffer)
 mesh.effectInstance = new DefaultEffect().createInstance()
 
 let camera = new Camera()
-camera.setFrustumFov(90, 800/600, 0, 1000)
-let camPosition = Point.new(-10, 0, 0)
+camera.setFrustumFov(90, 800/600, 0.5, 1000)
+let camPosition = Point.new(-0.5, 0, 0)
 let camDVector = Vector.UNIT_Z
 let camUVector = Vector.UNIT_Y_INV
 let camRVector = camDVector.cross(camUVector)
@@ -241,7 +246,7 @@ let scene = new Node()
 let cameraNode = new CameraNode(camera)
 //let mesh: TriMesh = adapter3ds.getMeshtAt(0)
 
-
+console.log(`Renderer viewport: ${renderer.viewport}`)
 console.log("Camera position: ", camera.position)
 console.log("Camera frustum: ", camera.frustum)
 
@@ -258,9 +263,12 @@ console.log("iBuffer elements: ", mesh.indexBuffer.numElements)
 scene.attachChild(cameraNode)
 scene.attachChild(mesh)
 
+console.log("Mesh worldMatrix: ", mesh.worldTransform.matrix)
+
 scene.update(0, true)
+
 renderer.draw(mesh, mesh.effectInstance)
-// renderer.displayColorBuffer()
+//renderer.displayColorBuffer()
 
 
 
