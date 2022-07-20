@@ -16,7 +16,7 @@ export class VWMatrixConstant extends ShaderFloat
         let viewMatrix: Matrix = camera.viewMatrix
         let worldMatrix: Matrix = visual.worldTransform.matrix
         let viewWorldMatrix: Matrix = viewMatrix.multiply(worldMatrix)
-        let source: number[] = viewWorldMatrix.toArray()
+        let source: number[] = viewWorldMatrix.tuple
 
         this._data.position = 0
         for(let i: number = 0; i < 16; ++i)

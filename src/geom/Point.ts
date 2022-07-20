@@ -15,6 +15,11 @@ export class Point implements Disposable {
 
     private _tuple: number[]
 
+    public get tuple()
+    {
+        return this._tuple
+    }
+
     public dispose(): void {
         Point._pool.release(this)
     }
@@ -135,10 +140,6 @@ export class Point implements Disposable {
 
     public dot(p: Point | Vector): number {
         return this.x * p.x + this.y * p.y + this.z * p.z
-    }
-
-    public toArray(): number[] {
-        return this._tuple
     }
 
     public toString(): string {

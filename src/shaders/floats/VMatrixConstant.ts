@@ -12,7 +12,7 @@ export class VMatrixConstant extends ShaderFloat
 
     public update(visual: Visual, camera: Camera): void
     {
-        let viewMatrix: number[] = camera.viewMatrix.toArray()
+        let viewMatrix: number[] = camera.viewMatrix.tuple
 
         this._data.position = 0
         for(let i: number = 0; i < 16; ++i)

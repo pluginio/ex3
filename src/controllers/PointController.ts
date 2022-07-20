@@ -120,7 +120,7 @@ export class PointController extends Controller
             let position = Point.new(positionList[0], positionList[1], positionList[2])
             let deltaTrn = this._pointLinearAxis.at(i).scale(distance)
 
-            vba.setPositionAt(i, position.add(deltaTrn).toArray())
+            vba.setPositionAt(i, position.add(deltaTrn).tuple)
         }
 
         if(vba.hasNormal())

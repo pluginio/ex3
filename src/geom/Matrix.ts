@@ -4,8 +4,10 @@ import { Vector } from "./Vector";
 import { Point } from "./Point";
 import { Constants } from "../core/Constants";
 
-export class Matrix implements Disposable {
+export class Matrix implements Disposable
+{
     private static readonly _pool: Pool<Matrix> = new Pool(10, Matrix)
+    private _tuple: Array<number> = new Array<number>(16)
 
     public static get TEST(): Matrix {
         return Matrix.new(
@@ -33,8 +35,6 @@ export class Matrix implements Disposable {
             0, 0, 0, 1,
         )
     }
-
-    private _tuple: number[] = []
 
     public constructor(
         m00: number = 1, m01: number = 0, m02: number = 0, m03: number = 0,
@@ -131,6 +131,11 @@ export class Matrix implements Disposable {
             m20, m21, m22, m23,
             m30, m31, m32, m33
         )
+    }
+
+    public get tuple(): number[]
+    {
+        return this._tuple
     }
 
     public set(
@@ -1086,7 +1091,7 @@ export class Matrix implements Disposable {
         this._tuple[15] = 1
     }
 
-    public toArray(): number[]
+    public valueOf(): number[]
     {
         return this._tuple
     }

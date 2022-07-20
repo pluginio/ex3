@@ -4,7 +4,6 @@ import { VertexFormat } from "../../resources/VertexFormat";
 import { AttributeUsage } from "resources/AttributeUsage";
 import { GL20Mapping } from "./GL20Mapping";
 import { GL20 } from "./GL20";
-import { GL20Renderer } from "./GL20Renderer";
 
 export class PdrVertexFormat implements IVertexFormat
 {
@@ -209,9 +208,9 @@ export class PdrVertexFormat implements IVertexFormat
 
         console.log("TODO: Complete enabling vertex format")
 
-        console.log("_position type: ", this._positionType)
         if(this._hasPosition)
         {
+            console.log("_hasPosition Type: ", this._positionType)
             gl.enableVertexAttribArray(0)
             gl.vertexAttribPointer(
                 this._positionIndex, 
@@ -225,6 +224,7 @@ export class PdrVertexFormat implements IVertexFormat
 
         if(this._hasNormal)
         {
+            console.log("_hasNormal Type: ", this._normalType)
             gl.enableVertexAttribArray(2)
             GL20.gl.vertexAttribPointer(
                 this._normalIndex, 
@@ -233,6 +233,81 @@ export class PdrVertexFormat implements IVertexFormat
                 false, 
                 this._stride, 
                 0 + this._normalOffset
+            )
+        }
+
+        if(this._hasTangent)
+        {
+            console.log("_hasTangent Type: ", this._tangentType)
+            gl.enableVertexAttribArray(14)
+            GL20.gl.vertexAttribPointer(
+                this._tangentIndex, 
+                this._tangentChannels, 
+                this._tangentType, 
+                false, 
+                this._stride, 
+                0 + this._tangentOffset
+            )
+        }
+
+        if(this._hasBinormal)
+        {
+            console.log("_hasBinormal Type: ", this._binormalType)
+            gl.enableVertexAttribArray(15)
+            GL20.gl.vertexAttribPointer(
+                this._binormalIndex, 
+                this._binormalChannels, 
+                this._binormalType, 
+                false, 
+                this._stride, 
+                0 + this._binormalOffset
+            )
+        }
+
+        for(let unit = 0; unit < VertexFormat.MAX_TCOORD_UNITS; ++unit)
+        {
+            if(this._hasTCoord[unit])
+            {
+                gl.activeTexture(gl.TEXTURE0 + unit)
+                //gl.enable(WebGL2RenderingContext.TEXTURE_BINDING_2D_ARRAY)
+
+                /*
+                gl.enableVertexAttribArray(14)
+                GL20.gl.vertexAttribPointer(
+                    this._tangentIndex, 
+                    this._tangentChannels, 
+                    this._tangentType, 
+                    false, 
+                    this._stride, 
+                    0 + this._tangentOffset
+                )
+                */
+            }
+        }
+
+        if(this._hasColor[0])
+        {
+            gl.enableVertexAttribArray(gl.COLOR)
+            gl.vertexAttribPointer(
+                this._colorIndex[0], 
+                this._colorChannels[0], 
+                this._colorType[0], 
+                false, 
+                this._stride, 
+                0 + this._colorOffset[0]
+            )
+        }
+
+        if(this._hasColor[1])
+        {
+            gl.enableVertexAttribArray(gl.COLOR + 1)
+            gl.vertexAttribPointer(
+                this._colorIndex[1], 
+                this._colorChannels[1], 
+                this._colorType[1], 
+                false, 
+                this._stride, 
+                0 + this._colorOffset[1]
             )
         }
     }
@@ -251,6 +326,34 @@ export class PdrVertexFormat implements IVertexFormat
         if(this._hasNormal)
         {
             gl.disableVertexAttribArray(2)
+        }
+
+        if(this._hasTangent)
+        {
+            gl.disableVertexAttribArray(14)
+        }
+
+        if(this._hasBinormal)
+        {
+            gl.disableVertexAttribArray(15)
+        }
+
+        for(let unit = 0; unit < VertexFormat.MAX_TCOORD_UNITS; ++unit)
+        {
+            if(this._hasTCoord[unit])
+            {
+                gl.disableVertexAttribArray(gl.TEXTURE0 + unit)
+            }
+        }
+
+        if(this._hasColor[0])
+        {
+            gl.disableVertexAttribArray(gl.COLOR)
+        }
+
+        if(this._hasColor[1])
+        {
+            gl.disableVertexAttribArray(gl.COLOR + 1)
         }
     }
 }

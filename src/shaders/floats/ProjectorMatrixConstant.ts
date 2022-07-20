@@ -30,7 +30,7 @@ export class ProjectorMatrixConstant extends ShaderFloat
             pvwMatrix = Projector.BiasScaleMatrix[this._bsMatrix].multiply(pvwMatrix)
         }
 
-        let source: number[] = pvwMatrix.toArray()
+        let source: number[] = pvwMatrix.tuple
 
         this._data.position = 0
         for(let i: number = 0; i < 16; ++i)

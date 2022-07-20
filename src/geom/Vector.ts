@@ -26,15 +26,15 @@ export class Vector implements Disposable {
         return Vector.new(0, 0, 1)
     }
 
-    public static get UNIT_X_INV(): Vector {
+    public static get UNIT_X_NEG(): Vector {
         return Vector.new(-1, 0, 0)
     }
 
-    public static get UNIT_Y_INV(): Vector {
+    public static get UNIT_Y_NEG(): Vector {
         return Vector.new(0, -1, 0)
     }
 
-    public static get UNIT_Z_INV(): Vector {
+    public static get UNIT_Z_NEG(): Vector {
         return Vector.new(0, 0, -1)
     }
 

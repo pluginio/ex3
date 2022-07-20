@@ -12,7 +12,7 @@ export class WMatrixConstant extends ShaderFloat
 
     public update(visual: Visual, camera: Camera)
     {
-        let worldMatrix: number[] = visual.worldTransform.matrix.toArray()
+        let worldMatrix: number[] = visual.worldTransform.matrix.tuple
 
         this._data.position = 0
         for(let i: number = 0; i < 16; ++i)

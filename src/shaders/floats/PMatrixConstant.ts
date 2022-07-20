@@ -12,7 +12,7 @@ export class PMatrixConstant extends ShaderFloat
 
     public update(visual: Visual, camera: Camera): void
     {
-        let projMatrix: number[] = camera.projectionMatrix.toArray()
+        let projMatrix: number[] = camera.projectionMatrix.tuple
 
         this._data.position = 0
         for(let i: number = 0; i < 16; ++i)

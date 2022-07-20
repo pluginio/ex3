@@ -4,7 +4,7 @@ import { Point } from '../../src/geom/Point'
 describe('Matrix Zero', (): void => {
     it('should be an zero matrix', (): void => {
         let matrix: Matrix = Matrix.ZERO
-        expect(matrix.toArray()).toEqual([
+        expect(matrix.tuple).toEqual([
             0, 0, 0, 0,
             0, 0, 0, 0,
             0, 0, 0, 0,
@@ -16,7 +16,7 @@ describe('Matrix Zero', (): void => {
 describe('Matrix Identity', (): void => {
     it('should be an identity matrix', (): void => {
         let matrix: Matrix = Matrix.IDENTITY
-        expect(matrix.toArray()).toEqual([
+        expect(matrix.tuple).toEqual([
             1, 0, 0, 0,
              0, 1, 0, 0,
              0, 0, 1, 0,
@@ -33,7 +33,7 @@ describe('Matrix constructor', (): void => {
             9, 8, 7, 6,
             5, 4, 3, 2
         )
-        expect(matrix.toArray()).toEqual([
+        expect(matrix.tuple).toEqual([
             1, 2, 3, 4,
             5, 6, 7, 8,
             9, 8, 7, 6,
@@ -45,7 +45,7 @@ describe('Matrix constructor', (): void => {
 describe('Matrix fromBool with true', (): void => {
     it('should be an identity matrix', (): void => {
         let matrix: Matrix = Matrix.fromBool(true)
-        expect(matrix.toArray()).toEqual(
+        expect(matrix.tuple).toEqual(
             [1, 0, 0, 0,
              0, 1, 0, 0,
              0, 0, 1, 0,
@@ -57,7 +57,7 @@ describe('Matrix fromBool with true', (): void => {
 describe('Matrix fromBool with false', (): void => {
     it('should be an identity matrix', (): void => {
         let matrix: Matrix = Matrix.fromBool(false)
-        expect(matrix.toArray()).toEqual(
+        expect(matrix.tuple).toEqual(
             [0, 0, 0, 0,
              0, 0, 0, 0,
              0, 0, 0, 0,
@@ -77,7 +77,7 @@ describe('Matrix fromTuple with row major', (): void => {
         ]
 
         let matrix: Matrix = Matrix.fromTuple(tuple, true)
-        expect(matrix.toArray()).toEqual([
+        expect(matrix.tuple).toEqual([
             1, 2, 3, 4,
             5, 6, 7, 8,
             9, 8, 7, 6,
@@ -97,7 +97,7 @@ describe('Matrix fromTuple with column major', (): void => {
         ]
 
         let matrix: Matrix = Matrix.fromTuple(tuple, false)
-        expect(matrix.toArray()).toEqual([
+        expect(matrix.tuple).toEqual([
             1, 5, 9, 5,
             2, 6, 8, 4,
             3, 7, 7, 3,
@@ -115,7 +115,7 @@ describe('Matrix fromFloats', (): void => {
         let matrix: Matrix = Matrix.fromFloats(
            1.0, 2.4, 5.8
         )
-        expect(matrix.toArray()).toEqual([
+        expect(matrix.tuple).toEqual([
             1, 0, 0, 0,
             0, 2.4, 0, 0,
             0, 0, 5.8, 0,
@@ -126,7 +126,19 @@ describe('Matrix fromFloats', (): void => {
 
 // TODO: Matrix fromAxisAngle
 
-describe('Matrix SET', (): void => {
+describe('Matrix new', (): void => {
+    it('should be a new identity matrix', (): void => {
+        let matrix: Matrix = Matrix.new()
+        expect(matrix.tuple).toEqual(
+            [1, 0, 0, 0,
+             0, 1, 0, 0,
+             0, 0, 1, 0,
+             0, 0, 0, 1]
+        )
+    })
+})
+
+describe('Matrix set', (): void => {
     it('should set the values of a Matrix', (): void => {
 
         let matrix: Matrix = Matrix.IDENTITY
@@ -138,7 +150,7 @@ describe('Matrix SET', (): void => {
             9, 2, 7, 5
         )
 
-        expect(matrix.toArray()).toEqual([
+        expect(matrix.tuple).toEqual([
             9, 1, 2, 6,
             6, 9, 1, 0,
             4, 5, 2, 8,
@@ -225,7 +237,7 @@ describe('Matrix setAt', (): void => {
         matrix.setAt(3, 2, 14)
         matrix.setAt(3, 3, 15)
     
-        expect(matrix.toArray()).toEqual([
+        expect(matrix.tuple).toEqual([
             0, 1, 2, 3,
             4, 5, 6, 7,
             8, 9, 10, 11,
@@ -243,7 +255,7 @@ describe('Matrix setRow', (): void => {
         matrix.setRow(2, [8, 9, 10, 11])
         matrix.setRow(3, [12, 13, 14, 15])
     
-        expect(matrix.toArray()).toEqual([
+        expect(matrix.tuple).toEqual([
             0, 1, 2, 3,
             4, 5, 6, 7,
             8, 9, 10, 11,
@@ -273,7 +285,7 @@ describe('Matrix setColumn', (): void => {
         matrix.setColumn(2, [8, 9, 10, 11])
         matrix.setColumn(3, [12, 13, 14, 15])
     
-        expect(matrix.toArray()).toEqual([
+        expect(matrix.tuple).toEqual([
             0, 4, 8, 12,
             1, 5, 9, 13,
             2, 6, 10, 14,
@@ -294,25 +306,13 @@ describe('Matrix getColumn', (): void => {
     })
 })
 
-describe('Matrix new', (): void => {
-    it('should be a new identity matrix', (): void => {
-        let matrix: Matrix = Matrix.new()
-        expect(matrix.toArray()).toEqual(
-            [1, 0, 0, 0,
-             0, 1, 0, 0,
-             0, 0, 1, 0,
-             0, 0, 0, 1]
-        )
-    })
-})
-
-describe('Matrix addition', (): void => {
+describe('Matrix add', (): void => {
     it('should add 2 identity matrices', (): void => {
         let m1: Matrix = Matrix.new()
         let m2: Matrix = Matrix.new()
         
         let result = m1.add(m2)
-        expect(result.toArray()).toEqual(
+        expect(result.tuple).toEqual(
             [2, 0, 0, 0,
              0, 2, 0, 0,
              0, 0, 2, 0,
@@ -336,11 +336,38 @@ describe('Matrix complex addition', (): void => {
         )
         
         let result = m1.add(m2)
-        expect(result.toArray()).toEqual(
+        expect(result.tuple).toEqual(
             [ -1,  4, 18,     11,
               14, 13, 21,      6,
               25,  7, 19,     24, 
               8,  19, 81 / 5, 25]
+        )
+    })
+})
+
+describe("Matrix addEq", (): void => {
+    it('should ass and assign the result back to the original matrix', (): void => {
+        let m1: Matrix = Matrix.IDENTITY
+        let m2: Matrix = Matrix.TEST
+
+        m2.addEq(m1)
+        expect(m2.tuple).toEqual(
+            [1, 1, 2, 3,
+             4, 6, 6, 7,
+             8, 9, 11, 11,
+            12, 13, 14, 16]
+        )
+    })
+})
+
+describe('Matrix subtract', (): void => {
+    it('should subtract a matrix from another', (): void => {
+        let m1: Matrix = Matrix.new()
+        let m2: Matrix = Matrix.new()
+        
+        let result = m1.subtract(m2)
+        expect(result).toEqual(
+            Matrix.ZERO
         )
     })
 })
@@ -351,11 +378,8 @@ describe('Matrix multiplication', (): void => {
         let m2: Matrix = Matrix.new()
 
         let result = m1.multiply(m2)
-        expect(result.toArray()).toEqual(
-            [1, 0, 0, 0,
-             0, 1, 0, 0,
-             0, 0, 1, 0,
-             0, 0, 0, 1]
+        expect(result).toEqual(
+            Matrix.IDENTITY
         )
     })
 })
@@ -376,7 +400,7 @@ describe('Matrix complex multiplication', (): void => {
         )
 
         let result = m1.multiply(m2)
-        expect(result.toArray()).toEqual([
+        expect(result.tuple).toEqual([
             -12, -26, -30, -34,
              20, -42, -54, -66,
              74, -30, -44, -58,
@@ -388,10 +412,10 @@ describe('Matrix complex multiplication', (): void => {
 describe('Identity matrix multiplication against a Point', (): void => {
     it('should return the Point unchanged', (): void => {
         let m1: Matrix = Matrix.new()
-        let p1: Point = Point.new( 1, 2, 3, 0)
+        let p1: Point = Point.new(1, 2, 3, 0)
 
         let result = m1.multiplyPoint(p1)
-        expect(result.toArray()).toEqual([
+        expect(result.tuple).toEqual([
             1, 2, 3, 0
         ])
     })

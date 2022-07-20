@@ -16,7 +16,7 @@ export class PVWMatrixConstant extends ShaderFloat
         let projViewMatrix: Matrix = camera.projectionViewMatrix
         let worldMatrix: Matrix = visual.worldTransform.matrix
         let projViewWorldMatrix = projViewMatrix.multiply(worldMatrix)
-        let source: number[] = projViewWorldMatrix.toArray()
+        let source: number[] = projViewWorldMatrix.tuple
 
         this._data.position = 0
         for(let i: number = 0; i < 16; ++i)

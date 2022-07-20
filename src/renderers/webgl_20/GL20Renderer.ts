@@ -101,14 +101,7 @@ export class GL20Renderer extends Renderer
                 console.log("**** Drawing ****")
                 console.log("Type: ", GL20Mapping.PrimitiveType[type])
 
-
-                // TODO: use drawRangeElements
-                gl.drawArrays(GL20Mapping.PrimitiveType[type], 0, numVertices)
-
-                /*
-                gl.drawRangeElements(GL20Mapping.PrimitiveType[type], 0, numVertices - 1,
-                    numIndices, indexType, ibuffer.offset)
-                    */
+                gl.drawElements(GL20Mapping.PrimitiveType[type], ibuffer.numElements, indexType, ibuffer.offset)
             }
         }
         else if(type == PrimitiveType.POLYSEGMENTS_CONTIGUOUS)
@@ -673,7 +666,8 @@ export class GL20Renderer extends Renderer
 
                 console.log("Drawing a TriMesh")
 
-                gl.drawArrays(GL20Mapping.PrimitiveType[type], offset, numVertices)
+                //gl.drawArrays(GL20Mapping.PrimitiveType[type], offset, numVertices)
+                gl.drawElements(GL20Mapping.PrimitiveType[type], ibuffer.numElements, indexType, 0)
 
                 /*
                 gl.drawRangeElements(GL20Mapping.PrimitiveType[type], 0, numVertices-1,
