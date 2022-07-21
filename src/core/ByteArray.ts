@@ -55,6 +55,11 @@ export class ByteArray implements Disposable
         return this._view
     }
 
+    public get float32Array(): Float32Array
+    {
+        return new Float32Array(this._data)
+    }
+
     public get position(): number
     {
         return this._position

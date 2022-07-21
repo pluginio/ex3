@@ -21,7 +21,7 @@ export class RendererData
 
 export class RendererState
 {
-    // TODO Why are these public?
+    // TODO: Why are these public?
     public mAlphaBlendEnabled: boolean
     public mAlphaSrcBlend: number
     public mAlphaDstBlend: number
@@ -56,8 +56,7 @@ export class RendererState
 
     public construction()
     {
-        // Initialization must be deferred until an OpenGL context has been
-        // created.
+        // Initialization must be deferred until a WebGL context has been created.
     }
 
     public Initialize(astate: AlphaState,
@@ -65,7 +64,7 @@ export class RendererState
         ostate: OffsetState, sstate: StencilState,
         wstate: WireState): void
     {
-        const gl: WebGL2RenderingContext = GL20.gl
+        const gl = GL20.gl
 
         this.mAlphaBlendEnabled = astate.blendEnabled
         this.mAlphaSrcBlend = GL20Mapping.AlphaSrcBlend[astate.srcBlend]

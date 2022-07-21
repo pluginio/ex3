@@ -12,6 +12,11 @@ import { CameraNode } from './display/CameraNode';
 import { Node } from './display/Node';
 import { ParserAdapter3ds } from 'parsers/max3ds/ParserAdapter3ds';
 import { ByteArray } from './core/ByteArray';
+import { AlphaState } from 'shaders/states/AlphaState';
+import { CullState } from 'shaders/states/CullState';
+import { VertexShader } from 'shaders/VertexShader';
+import { VertexShaderProfile } from 'shaders/VertexShaderProfile';
+import { PixelShader } from 'shaders/PixelShader';
 
 console.log('Hello EX3')
 let fileSelect: HTMLInputElement = document?.getElementById('file-select') as HTMLInputElement
@@ -43,14 +48,13 @@ fileSelect?.addEventListener('change', async (e) => {
         
         let renderer = new GL20Renderer(input, 800, 600,
         TextureFormat.R8G8B8, TextureFormat.D24S8, 4)
+
         renderer.setDepthRange(0.01, 1000)
         renderer.clearColor =[0.5, 0.6, 0.7, 1.0]
         renderer.clearBuffers()
         
         let mesh = adapter3ds.getMeshtAt(0)
         mesh.effectInstance = new DefaultEffect().createInstance()
-        mesh.effectInstance.effect.alphaState(0, 0).srcBlend = SrcBlendMode.ZERO
-        mesh.effectInstance.effect.alphaState(0, 0).dstBlend = DstBlendMode.ZERO
         
         // TODO: Move the shader program code to the pass
         let vShader = gl.createShader(gl.VERTEX_SHADER)
@@ -111,7 +115,24 @@ fileSelect?.addEventListener('change', async (e) => {
         
         console.log("Mesh worldMatrix: ", mesh.worldTransform.matrix)
         
-        scene.update(0, true)
+        scene.update(0, false)
+
+        console.log("world bound", mesh.worldBound)
+        
+        let alphaState = new AlphaState()
+        alphaState.constantColor = [0, 0, 0, .1]
+        alphaState.srcBlend = SrcBlendMode.DST_COLOR
+        alphaState.dstBlend = DstBlendMode.CONSTANT_ALPHA
+        alphaState.blendEnabled = true
+
+        let cullState = new CullState()
+        cullState.enabled = true
+        cullState.ccwOrder = true
+
+        mesh.effectInstance.getPass(0).alphaState = alphaState
+        mesh.effectInstance.getPass(0).cullState = cullState
+        
+        console.log("Updated alpha state: ", mesh.effectInstance.getPass(0).alphaState)
         
         renderer.draw(mesh, mesh.effectInstance)
 

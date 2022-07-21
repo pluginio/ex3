@@ -36,8 +36,8 @@ export class GL20Renderer extends Renderer
         this._data = data
         data.mWindowID = input.mWindowID
 
-        VertexShader.profile = VertexShaderProfile.ARBVP1
-        PixelShader.profile = PixelShaderProfile.ARBFP1
+        VertexShader.profile = VertexShaderProfile.ES_300
+        PixelShader.profile = PixelShaderProfile.ES_300
 
         data.mMaxVShaderImages = 0
         data.mMaxPShaderImages = 0
